@@ -1,0 +1,34 @@
+﻿@model GuestViewModel
+@{
+    ViewData["Title"] = "Add New Guest";
+}
+<form asp-controller="GuestList" asp-action="AddNewGuest" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-group">
+
+        <div class="form-group row">
+            <label asp-for="ActiveGuest.FirstName">First Name:</label>
+            <input type="text" asp-for="ActiveGuest.FirstName" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="ActiveGuest.LastName">Last Name:</label>
+            <input type="text" asp-for="ActiveGuest.LastName" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="ActiveGuest.PhoneNumber">Phone Number:</label>
+            <input type="text" asp-for="ActiveGuest.PhoneNumber" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="ActiveGuest.Email">Email:</label>
+            <input type="text" asp-for="ActiveGuest.Email" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="ActiveGuest.ExtraRole">Role:</label>
+            <input type="text" asp-for="ActiveGuest.ExtraRole" />
+        </div>
+        <div class="form-group row">
+            <br />
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </div>
+
+</form>

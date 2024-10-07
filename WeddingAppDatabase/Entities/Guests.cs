@@ -16,8 +16,10 @@ namespace WeddingAppDatabase.Entities
 
         public string? LastName { get; set; }
         
-        public int PlusOneId { get; set; }
+        public int? PlusOneId { get; set; }
         public Guests? Guest { get; set; }
+
+        public string? ExtraRole { get; set; }
 
         public string? PhoneNumber { get; set; }
         
