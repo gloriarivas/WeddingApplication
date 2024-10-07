@@ -5,7 +5,7 @@
 namespace WeddingApp.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class intial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,8 @@ namespace WeddingApp.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PlusOneId = table.Column<int>(type: "int", nullable: false),
+                    PlusOneId = table.Column<int>(type: "int", nullable: true),
+                    ExtraRole = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -30,8 +31,7 @@ namespace WeddingApp.Migrations
                         name: "FK_Guests_Guests_PlusOneId",
                         column: x => x.PlusOneId,
                         principalTable: "Guests",
-                        principalColumn: "GuestId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "GuestId");
                 });
 
             migrationBuilder.CreateTable(
@@ -107,7 +107,8 @@ namespace WeddingApp.Migrations
                 name: "IX_Guests_PlusOneId",
                 table: "Guests",
                 column: "PlusOneId",
-                unique: true);
+                unique: true,
+                filter: "[PlusOneId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SeatingChart_GuestId",
