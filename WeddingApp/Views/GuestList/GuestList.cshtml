@@ -2,16 +2,12 @@
 @{
     ViewData["Title"] = "Guest List";
 }
-<div style="display: flex">
-	<form asp-controller="GuestList" asp-action="GetGuestList" method="get" enctype="application/x-www-form-urlencoded">
-		<button type="submit" class="btn btn-primary">See guest list</button>
-	</form>
-	<p>&nbsp;</p>
-	<form asp-controller="GuestList" asp-action="AddNewGuestRequest" method="get" enctype="application/x-www-form-urlencoded">
-		<button type="submit" class="btn btn-primary">Add new guest</button>
-	</form>
-</div>
-	<br />
+
+<form asp-controller="GuestList" asp-action="AddNewGuestRequest" method="get" enctype="application/x-www-form-urlencoded">
+	<button type="submit" class="btn btn-primary">Add new guest</button>
+</form>
+
+<br />
 
 <table class="table table-bordered table-striped">
 	<thead>
@@ -28,22 +24,22 @@
 	<tbody>
 		@foreach (var guest in Model.Guests)
 		{	
-				<tr>
-					<td>@guest.FirstName</td>
-					<td>@guest.LastName</td>
-					<td>@guest.ExtraRole</td>
-					<td>@guest.PhoneNumber</td>
-					<td>@guest.Email</td>
-					<td>@guest.Address</td>
-					<td>
-					<form style="text-align: center">
-						<input type="hidden" asp-for="@guest.GuestId" />
-						<a asp-controller="GuestList" asp-action="EditGuestRequest" asp-route-guestId="@guest.GuestId">Edit</a>
-						<span class="mx-1">|</span>
-						<a asp-controller="GuestList" asp-action="DeleteGuestRequest" asp-route-guestId="@guest.GuestId">Delete</a>
-					</form>
-					</td>
-				</tr>
+			<tr>
+				<td>@guest.FirstName</td>
+				<td>@guest.LastName</td>
+				<td>@guest.ExtraRole</td>
+				<td>@guest.PhoneNumber</td>
+				<td>@guest.Email</td>
+				<td>@guest.Address</td>
+				<td>
+				<form style="text-align: center">
+					<input type="hidden" asp-for="@guest.GuestId" />
+					<a asp-controller="GuestList" asp-action="EditGuestRequest" asp-route-guestId="@guest.GuestId">Edit</a>
+					<span class="mx-1">|</span>
+					<a asp-controller="GuestList" asp-action="DeleteGuestRequest" asp-route-guestId="@guest.GuestId">Delete</a>
+				</form>
+				</td>
+			</tr>
 		}
 	</tbody>
 </table>

@@ -20,7 +20,7 @@ namespace WeddingApp.Controllers
 
         public IActionResult GuestList()
         {
-            return View() ;
+            return View();
         }
 
         /// <summary>
@@ -76,7 +76,23 @@ namespace WeddingApp.Controllers
             {
                 ActiveGuest = GetGuestById(guestId)
             };
-            return View("EditGuest",guest);
+            return View("EditGuest", guest);
+        }
+
+        /// <summary>
+        /// Update guest info to db, then redirect to the guest list
+        /// </summary>
+        /// <param name="guestViewModel"></param>
+        /// <returns></returns>
+        [HttpPost()]
+        public IActionResult EditGuest(GuestViewModel guestViewModel, int guestId)
+        {
+            //for some reason view model isn't passing the id, so re-add it before updating db
+            guestViewModel.ActiveGuest.GuestId = guestId;
+            _weddingDbContext.Guests.Update(guestViewModel.ActiveGuest);
+            _weddingDbContext.SaveChanges();
+
+            return RedirectToAction("GetGuestList", "GuestList");
         }
 
         private Guests? GetGuestById(int guestId)
