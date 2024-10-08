@@ -72,8 +72,16 @@ namespace WeddingApp.Controllers
         [HttpGet("/EditGuest/{guestId}")]
         public IActionResult EditGuestRequest(int guestId)
         {
+            GuestViewModel guest = new GuestViewModel()
+            {
+                ActiveGuest = GetGuestById(guestId)
+            };
+            return View("EditGuest",guest);
+        }
 
-            return View();
+        private Guests? GetGuestById(int guestId)
+        {
+            return _weddingDbContext?.Guests.Where(g => g.GuestId == guestId).FirstOrDefault();
         }
     }
 }

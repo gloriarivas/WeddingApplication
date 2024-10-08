@@ -1,11 +1,12 @@
 ﻿@model GuestViewModel
 @{
-    ViewData["Title"] = "Add New Guest";
+    ViewData["Title"] = "Edit Guest";
 }
 <form asp-controller="GuestList" asp-action="AddNewGuest" method="post" enctype="application/x-www-form-urlencoded">
+    <input type="hidden" value="@Model.ActiveGuest.GuestId"/>
     <partial name="_GuestAddEditPartial" />
     <br />
     <div class="form-group row">
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
     </div>
 </form>

@@ -2,14 +2,16 @@
 @{
     ViewData["Title"] = "Guest List";
 }
-
-<form asp-controller="GuestList" asp-action="GetGuestList" method="get" enctype="application/x-www-form-urlencoded">
-    <button type="submit" class="btn btn-primary">See guest list</button>
-</form>
-<br />
-<form asp-controller="GuestList" asp-action="AddNewGuestRequest" method="get" enctype="application/x-www-form-urlencoded">
-    <button type="submit" class="btn btn-primary">Add new guest</button>
-</form>
+<div style="display: flex">
+	<form asp-controller="GuestList" asp-action="GetGuestList" method="get" enctype="application/x-www-form-urlencoded">
+		<button type="submit" class="btn btn-primary">See guest list</button>
+	</form>
+	<p>&nbsp;</p>
+	<form asp-controller="GuestList" asp-action="AddNewGuestRequest" method="get" enctype="application/x-www-form-urlencoded">
+		<button type="submit" class="btn btn-primary">Add new guest</button>
+	</form>
+</div>
+	<br />
 
 <table class="table table-bordered table-striped">
 	<thead>
@@ -25,8 +27,7 @@
 	</thead>
 	<tbody>
 		@foreach (var guest in Model.Guests)
-		{
-			
+		{	
 				<tr>
 					<td>@guest.FirstName</td>
 					<td>@guest.LastName</td>
@@ -43,7 +44,6 @@
 					</form>
 					</td>
 				</tr>
-			
 		}
 	</tbody>
 </table>
