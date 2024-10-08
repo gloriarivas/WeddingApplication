@@ -6,6 +6,7 @@
 <form asp-controller="GuestList" asp-action="GetGuestList" method="get" enctype="application/x-www-form-urlencoded">
     <button type="submit" class="btn btn-primary">See guest list</button>
 </form>
+<br />
 <form asp-controller="GuestList" asp-action="AddNewGuestRequest" method="get" enctype="application/x-www-form-urlencoded">
     <button type="submit" class="btn btn-primary">Add new guest</button>
 </form>
@@ -19,6 +20,7 @@
 			<th>Phone Number</th>
 			<th>Email</th>
 			<th>Address</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -33,14 +35,12 @@
 					<td>@guest.Email</td>
 					<td>@guest.Address</td>
 					<td>
-						@* <form asp-controller="Vendor" asp-action="UpdateDeletion" asp-route-vendorId="@vendor.VendorId" method="post" enctype="application/x-www-form-urlencoded">
-							<input type="hidden" asp-for="@vendor.VendorId">
-							<a asp-controller="Vendor" asp-action="InvoicesByVendorId" asp-route-vendorId="@vendor.VendorId">Invoices</a>
-							<span class="mx-1">|</span>
-							<a asp-controller="Vendor" asp-action="GetEditVendorRequest" asp-route-vendorId="@vendor.VendorId">Edit</a>
-							<span class="mx-1">|</span>
-							<button type="submit" class="btn btn-link">Delete</button>
-						</form> *@
+					<form style="text-align: center">
+						<input type="hidden" asp-for="@guest.GuestId" />
+						<a asp-controller="GuestList" asp-action="EditGuestRequest" asp-route-guestId="@guest.GuestId">Edit</a>
+						<span class="mx-1">|</span>
+						<a asp-controller="GuestList" asp-action="DeleteGuestRequest" asp-route-guestId="@guest.GuestId">Delete</a>
+					</form>
 					</td>
 				</tr>
 			
