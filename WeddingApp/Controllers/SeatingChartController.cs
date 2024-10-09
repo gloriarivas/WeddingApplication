@@ -18,6 +18,7 @@ namespace WeddingApp.Controllers
             return View();
         }
 
+        [HttpGet("/Seating")]
         public IActionResult GetSeatingChart()
         {
             List<SeatingChart> seats = _weddingDbContext.SeatingChart.ToList();
@@ -27,7 +28,7 @@ namespace WeddingApp.Controllers
                 Seats = seats,
                 Tables = tables
             };
-            return View();
+            return View("SeatingChart");
 
         }
     }

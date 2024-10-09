@@ -108,6 +108,14 @@ namespace WeddingApp.Controllers
             _weddingDbContext.Guests.Where(g => g.GuestId == guestId).ExecuteDelete();
             return RedirectToAction("GetGuestList", "GuestList");
         }
+
+        [HttpGet()]
+        public IActionResult AddPlusOne()
+        {
+
+            return View();
+        }
+
         private Guests? GetGuestById(int guestId)
         {
             return _weddingDbContext?.Guests.Where(g => g.GuestId == guestId).FirstOrDefault();
