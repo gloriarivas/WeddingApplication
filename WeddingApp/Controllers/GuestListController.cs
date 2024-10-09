@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WeddingApp.DataAccess;
 using WeddingApp.Models;
 using WeddingAppDatabase.Entities;
@@ -94,7 +95,19 @@ namespace WeddingApp.Controllers
 
             return RedirectToAction("GetGuestList", "GuestList");
         }
+        //TODO: delete guest button funcs, add plus ones
 
+        /// <summary>
+        /// Deletes the guest with guest id, redirects to the guest list page
+        /// </summary>
+        /// <param name="guestId"></param>
+        /// <returns></returns>
+        [HttpPost()]
+        public IActionResult DeleteGuestRequest(int guestId) 
+        {
+            _weddingDbContext.Guests.Where(g => g.GuestId == guestId).ExecuteDelete();
+            return RedirectToAction("GetGuestList", "GuestList");
+        }
         private Guests? GetGuestById(int guestId)
         {
             return _weddingDbContext?.Guests.Where(g => g.GuestId == guestId).FirstOrDefault();
