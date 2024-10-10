@@ -1,0 +1,18 @@
+﻿@model ChecklistViewModel
+@{
+    ViewData["Title"] = "Checklist";
+}
+
+<form asp-controller="Checklist" asp-action="AddNewItem" method="post" enctype="application/x-www-form-urlencoded">
+    <label asp-for="ListItem.ListItem">Add an item </label>
+    <input type="text" asp-for="ListItem.ListItem" />
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+@foreach (var listItem in Model.ChecklistItems)
+{
+   <div class="checkbox">
+       <input type="checkbox" asp-for="@listItem.Completed" />
+        <label asp-for="@listItem.ListItem">@listItem.ListItem</label>
+   </div>
+}

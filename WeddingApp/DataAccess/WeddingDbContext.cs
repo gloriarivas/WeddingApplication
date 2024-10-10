@@ -21,6 +21,8 @@ namespace WeddingApp.DataAccess
 
         public DbSet<SeatingChart> SeatingChart { get; set; }
 
+        public DbSet<Checklists> Checklists { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
