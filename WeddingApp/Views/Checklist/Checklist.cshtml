@@ -11,8 +11,11 @@
 
 @foreach (var listItem in Model.ChecklistItems)
 {
-   <div class="checkbox">
-       <input type="checkbox" asp-for="@listItem.Completed" />
-        <label asp-for="@listItem.ListItem">@listItem.ListItem</label>
-   </div>
+    <form asp-controller="Checklist" asp-action="CheckItem" method="post" asp-route-checklistId="@listItem.ChecklistId">
+        <div class="checkbox">
+            <input type="hidden" asp-for="@listItem.ChecklistId" />
+            <input type="checkbox" value="" asp-for="@listItem.Completed" onchange="this.form.submit()"/>
+            <label asp-for="@listItem.ListItem">@listItem.ListItem</label>
+       </div>
+    </form>
 }
