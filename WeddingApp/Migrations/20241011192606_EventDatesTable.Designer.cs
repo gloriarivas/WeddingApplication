@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeddingApp.DataAccess;
 
@@ -11,9 +12,11 @@ using WeddingApp.DataAccess;
 namespace WeddingApp.Migrations
 {
     [DbContext(typeof(WeddingDbContext))]
-    partial class WeddingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241011192606_EventDatesTable")]
+    partial class EventDatesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,25 +25,6 @@ namespace WeddingApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-<<<<<<< HEAD
-            modelBuilder.Entity("WeddingAppDatabase.Entities.Checklists", b =>
-                {
-                    b.Property<int>("ChecklistId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ChecklistId"));
-
-                    b.Property<bool?>("Completed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ListItem")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ChecklistId");
-
-                    b.ToTable("Checklists");
-=======
             modelBuilder.Entity("WeddingAppDatabase.Entities.Dates", b =>
                 {
                     b.Property<int>("DateId")
@@ -62,7 +46,6 @@ namespace WeddingApp.Migrations
                     b.HasKey("DateId");
 
                     b.ToTable("Dates");
->>>>>>> dd49752 (important dates added)
                 });
 
             modelBuilder.Entity("WeddingAppDatabase.Entities.DietaryNeeds", b =>
