@@ -1,15 +1,45 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace WeddingApp.Migrations
 {
     /// <inheritdoc />
-    public partial class intial : Migration
+    public partial class inital : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Checklists",
+                columns: table => new
+                {
+                    ChecklistId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ListItem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Completed = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Checklists", x => x.ChecklistId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dates",
+                columns: table => new
+                {
+                    DateId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateEnd = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dates", x => x.DateId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Guests",
                 columns: table => new
@@ -124,6 +154,12 @@ namespace WeddingApp.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Checklists");
+
+            migrationBuilder.DropTable(
+                name: "Dates");
+
             migrationBuilder.DropTable(
                 name: "DietaryNeeds");
 

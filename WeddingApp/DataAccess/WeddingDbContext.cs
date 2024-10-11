@@ -23,6 +23,8 @@ namespace WeddingApp.DataAccess
 
         public DbSet<Checklists> Checklists { get; set; }
 
+        public DbSet<Dates> Dates { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
