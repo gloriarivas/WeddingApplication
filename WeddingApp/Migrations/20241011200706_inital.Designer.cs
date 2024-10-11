@@ -12,8 +12,8 @@ using WeddingApp.DataAccess;
 namespace WeddingApp.Migrations
 {
     [DbContext(typeof(WeddingDbContext))]
-    [Migration("20241010155432_Checklists")]
-    partial class Checklists
+    [Migration("20241011200706_inital")]
+    partial class inital
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace WeddingApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ChecklistId"));
 
-                    b.Property<bool?>("Completed")
+                    b.Property<bool>("Completed")
                         .HasColumnType("bit");
 
                     b.Property<string>("ListItem")
@@ -42,6 +42,29 @@ namespace WeddingApp.Migrations
                     b.HasKey("ChecklistId");
 
                     b.ToTable("Checklists");
+                });
+
+            modelBuilder.Entity("WeddingAppDatabase.Entities.Dates", b =>
+                {
+                    b.Property<int>("DateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DateId"));
+
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DateId");
+
+                    b.ToTable("Dates");
                 });
 
             modelBuilder.Entity("WeddingAppDatabase.Entities.DietaryNeeds", b =>
