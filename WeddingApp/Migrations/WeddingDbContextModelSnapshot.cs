@@ -22,7 +22,6 @@ namespace WeddingApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-<<<<<<< HEAD
             modelBuilder.Entity("WeddingAppDatabase.Entities.Checklists", b =>
                 {
                     b.Property<int>("ChecklistId")
@@ -40,29 +39,6 @@ namespace WeddingApp.Migrations
                     b.HasKey("ChecklistId");
 
                     b.ToTable("Checklists");
-=======
-            modelBuilder.Entity("WeddingAppDatabase.Entities.Dates", b =>
-                {
-                    b.Property<int>("DateId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DateId"));
-
-                    b.Property<DateTime>("DateEnd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateStart")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DateId");
-
-                    b.ToTable("Dates");
->>>>>>> dd49752 (important dates added)
                 });
 
             modelBuilder.Entity("WeddingAppDatabase.Entities.DietaryNeeds", b =>
