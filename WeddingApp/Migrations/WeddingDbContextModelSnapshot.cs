@@ -30,7 +30,7 @@ namespace WeddingApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ChecklistId"));
 
-                    b.Property<bool?>("Completed")
+                    b.Property<bool>("Completed")
                         .HasColumnType("bit");
 
                     b.Property<string>("ListItem")
@@ -39,6 +39,29 @@ namespace WeddingApp.Migrations
                     b.HasKey("ChecklistId");
 
                     b.ToTable("Checklists");
+                });
+
+            modelBuilder.Entity("WeddingAppDatabase.Entities.Dates", b =>
+                {
+                    b.Property<int>("DateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DateId"));
+
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DateId");
+
+                    b.ToTable("Dates");
                 });
 
             modelBuilder.Entity("WeddingAppDatabase.Entities.DietaryNeeds", b =>
@@ -99,6 +122,104 @@ namespace WeddingApp.Migrations
                         .HasFilter("[PlusOneId] IS NOT NULL");
 
                     b.ToTable("Guests");
+                });
+
+            modelBuilder.Entity("WeddingAppDatabase.Entities.Pictures", b =>
+                {
+                    b.Property<int>("PictureId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PictureId"));
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PictureId");
+
+                    b.ToTable("Pictures");
+
+                    b.HasData(
+                        new
+                        {
+                            PictureId = 1,
+                            Url = "Images\\IMG_0629.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 2,
+                            Url = "Images\\IMG_0630.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 3,
+                            Url = "Images\\IMG_1540.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 4,
+                            Url = "Images\\IMG_2702.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 5,
+                            Url = "Images\\IMG_2708.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 6,
+                            Url = "Images\\IMG_2714.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 7,
+                            Url = "Images\\IMG_3218.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 8,
+                            Url = "Images\\IMG_3271.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 9,
+                            Url = "Images\\IMG_3285.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 10,
+                            Url = "Images\\IMG_3291.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 11,
+                            Url = "Images\\IMG_3309.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 12,
+                            Url = "Images\\IMG_4107.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 13,
+                            Url = "Images\\IMG_4370.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 14,
+                            Url = "Images\\IMG_4390.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 15,
+                            Url = "Images\\OXLZ6554.JPG"
+                        },
+                        new
+                        {
+                            PictureId = 16,
+                            Url = "Images\\SIAM0204.JPG"
+                        });
                 });
 
             modelBuilder.Entity("WeddingAppDatabase.Entities.SeatingChart", b =>

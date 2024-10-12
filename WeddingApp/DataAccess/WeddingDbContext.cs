@@ -25,6 +25,8 @@ namespace WeddingApp.DataAccess
 
         public DbSet<Dates> Dates { get; set; }
 
+        public DbSet<Pictures> Pictures { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -54,7 +56,29 @@ namespace WeddingApp.DataAccess
                 .WithMany(g => g.SeatingCharts)
                 .HasForeignKey(s => s.GuestId)
                 .OnDelete(DeleteBehavior.Cascade);
+            //seed images into the db, TODO: add images dynamically with IO
+
+            modelBuilder.Entity<Pictures>().HasData(
+                new Pictures() { PictureId = 1, Url = "Images\\IMG_0629.JPG"},
+                new Pictures() { PictureId = 2, Url = "Images\\IMG_0630.JPG"},
+                new Pictures() { PictureId = 3, Url = "Images\\IMG_1540.JPG"},
+                new Pictures() { PictureId = 4, Url = "Images\\IMG_2702.JPG"},
+                new Pictures() { PictureId = 5, Url = "Images\\IMG_2708.JPG"},
+                new Pictures() { PictureId = 6, Url = "Images\\IMG_2714.JPG"},
+                new Pictures() { PictureId = 7, Url = "Images\\IMG_3218.JPG"},
+                new Pictures() { PictureId = 8, Url = "Images\\IMG_3271.JPG"},
+                new Pictures() { PictureId = 9, Url = "Images\\IMG_3285.JPG"},
+                new Pictures() { PictureId = 10, Url = "Images\\IMG_3291.JPG"},
+                new Pictures() { PictureId = 11, Url = "Images\\IMG_3309.JPG"},
+                new Pictures() { PictureId = 12, Url = "Images\\IMG_4107.JPG"},
+                new Pictures() { PictureId = 13, Url = "Images\\IMG_4370.JPG"},
+                new Pictures() { PictureId = 14, Url = "Images\\IMG_4390.JPG"},
+                new Pictures() { PictureId = 15, Url = "Images\\OXLZ6554.JPG"},
+                new Pictures() { PictureId = 16, Url = "Images\\SIAM0204.JPG"}
+                );
         }
+
+        
 
     }
 }

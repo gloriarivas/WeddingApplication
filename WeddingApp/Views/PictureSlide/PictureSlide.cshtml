@@ -1,0 +1,12 @@
+﻿@model ImageViewModel
+@{
+    ViewData["Title"] = "Nick & Gloria";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Nick and Gloria's Wedding</h1>
+    @foreach (var image in Model.Pictures)
+    {
+        <input type="image" asp-for="@image.Url" />
+    }
+</div>
