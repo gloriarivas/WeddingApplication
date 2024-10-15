@@ -5,8 +5,17 @@
 
 <div class="text-center">
     <h1 class="display-4">Nick and Gloria's Wedding</h1>
-    @foreach (var image in Model.Pictures)
-    {
-        <img src="@image.Url" />
-    }
+    <div id="carouselExample" class="carousel slide align-content-center" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="3000">
+                <img src="@Model.Pictures[1].Url" width="500px">
+            </div>
+                @foreach (var image in Model.Pictures)
+                {
+                <div class="carousel-item" data-bs-interval="3000" >
+                    <img src="@image.Url" width="500px" />
+                    </div>
+                }
+        </div>
+    </div>
 </div>
