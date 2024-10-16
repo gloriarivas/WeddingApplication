@@ -27,6 +27,12 @@ namespace WeddingApp.DataAccess
 
         public DbSet<Pictures> Pictures { get; set; }
 
+        public DbSet<Restaurants> Restaurants { get; set; }
+        
+        public DbSet<Bars> Bars { get; set; }
+
+        public DbSet<DressCode> DressCode { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -56,7 +62,13 @@ namespace WeddingApp.DataAccess
                 .WithMany(g => g.SeatingCharts)
                 .HasForeignKey(s => s.GuestId)
                 .OnDelete(DeleteBehavior.Cascade);
-            //seed images into the db, TODO: add images dynamically with IO
+
+            modelBuilder.Entity<Restaurants>()
+                .HasOne(d => d.DressCode)
+                .WithMany(r => r.Restaurants)
+                .HasForeignKey(d => d.DressCodeId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
 
             modelBuilder.Entity<Pictures>().HasData(
                 new Pictures() { PictureId = 1, Url = "Images\\IMG_0629.JPG"},
