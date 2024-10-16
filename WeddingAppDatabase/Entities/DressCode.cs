@@ -14,9 +14,13 @@ namespace WeddingAppDatabase.Entities
 
         public string? Title { get; set; }
 
-        public string? Description { get; set; }
+        public string? DescriptionWomen { get; set; }
 
-        public string? BannedItems { get; set; }
+        public string? BannedItemsWomen { get; set; }
+
+        public string? DescriptionMen { get; set; }
+
+        public string? BannedItemsMen { get; set; }
 
         public ICollection<Restaurants>? Restaurants { get; set; }
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeddingApp.DataAccess;
 
@@ -11,9 +12,11 @@ using WeddingApp.DataAccess;
 namespace WeddingApp.Migrations
 {
     [DbContext(typeof(WeddingDbContext))]
-    partial class WeddingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241016153836_dressCodeFix")]
+    partial class dressCodeFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -286,20 +289,26 @@ namespace WeddingApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RestaurantId"));
 
+                    b.Property<double?>("BreakfastHoursEnd")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("BreakfastHoursStart")
+                        .HasColumnType("float");
+
                     b.Property<string>("CuisineType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DressCodeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("HoursBreakfast")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("HasBreakfastHours")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("HoursDinner")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double?>("HoursEnd")
+                        .HasColumnType("float");
 
-                    b.Property<string>("HoursLunch")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double?>("HoursStart")
+                        .HasColumnType("float");
 
                     b.Property<string>("RestaurantDescription")
                         .HasColumnType("nvarchar(max)");

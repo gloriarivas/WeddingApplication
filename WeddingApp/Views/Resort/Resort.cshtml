@@ -1,17 +1,81 @@
-﻿@{
+﻿@model ResortInfoViewModel
+@{
     ViewData["Title"] = "Resort Info";
 }
-<div>
-    <h2>Restaurants</h2>
-    <a href="https://www.valentinmaya.com/en/gastronomy/">Dining at Valentin</a>
-    <h3>Taman Sari</h3>
-    <h3>La Hacienda</h3>
-    <h3>Ginger</h3>
-    <h3>L'Alsace</h3>
-    <h3>L'Olivo</h3>
-    <h3>Le March&#233;</h3>
-    <h3>Mar</h3>
-    <h3>Tierra</h3>
+
+<h2>Restaurants</h2>
+<div class="row">
+@foreach (var item in Model.Restaurants)
+{
+    <div class="col-sm-4 mb-3 mb-sm-0">
+        <div class="card">
+            <div class="card-body">
+                <h5>@item.RestaurantName</h5>
+                <p>
+                    Cuisine: @item.CuisineType <br />
+                    Description: @item.RestaurantDescription<br />
+                    Dress Code: @item.DressCode.Title <br />
+                    Hours: @item.HoursBreakfast <br /> @item.HoursLunch <br /> @item.HoursDinner
+                </p>
+            </div>
+        </div>
+        <br />
+    </div>
+}
 </div>
+
 <h2>Bars</h2>
+<div class="row">
+    @foreach (var item in Model.Bars)
+    {
+        <div class="col-sm-4 mb-3 mb-sm-0">
+            <div class="card">
+                <div class="card-body">
+                    <h5>@item.BarName</h5>
+                    <p>
+                       Description: @item.Description <br />
+                       @if(@item.SpecialInstructions != ""){
+                            <i>@item.SpecialInstructions</i> <br />
+                       }
+                       Hours: @item.HoursStart - @item.HoursEnd
+                    </p>
+                </div>
+            </div>
+            <br />
+        </div>
+    }
+</div>
 <h2>Event Spaces</h2>
+
+<h2>Dress Code</h2>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Title</th>
+            <th>Women</th>
+            <th>Men</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var code in Model.DressCodes)
+        {
+            if(code.Title == "None")
+            {
+                <tr>
+                    <td class="fw-bold">@code.Title</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td class="fw-bold">@code.Title</td>
+                    <td>@code.DescriptionWomen <br />No: @code.BannedItemsWomen</td>
+                    <td>@code.DescriptionMen <br />No: @code.BannedItemsMen</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<a href="https://www.valentinmaya.com/en/gastronomy/">Valentin Website</a>
