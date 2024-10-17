@@ -2,20 +2,41 @@
 @{
     ViewData["Title"] = "Checklist";
 }
+<div class="row">
+    <div class="col">
+        <h2>To Do List:</h2>
+        <form asp-controller="Checklist" asp-action="AddNewItem" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="text" asp-for="ListItem.ListItem" />
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
 
-<form asp-controller="Checklist" asp-action="AddNewItem" method="post" enctype="application/x-www-form-urlencoded">
-    <label asp-for="ListItem.ListItem">Add an item </label>
-    <input type="text" asp-for="ListItem.ListItem" />
-    <button type="submit" class="btn btn-primary">Add</button>
-</form>
-
-@foreach (var listItem in Model.ChecklistItems)
-{
-    <form asp-controller="Checklist" asp-action="CheckItem" method="post" asp-route-checklistId="@listItem.ChecklistId">
-        <div class="checkbox">
-            <input type="hidden" asp-for="@listItem.ChecklistId" />
-            <input type="checkbox" value="" asp-for="@listItem.Completed" onchange="this.form.submit()"/>
-            <label asp-for="@listItem.ListItem">@listItem.ListItem</label>
-       </div>
+        @foreach (var listItem in Model.ChecklistItems)
+        {
+            <form asp-controller="Checklist" asp-action="CheckItem" method="post" asp-route-checklistId="@listItem.ChecklistId">
+                <div class="checkbox">
+                    <input type="hidden" asp-for="@listItem.ChecklistId" />
+                    <input type="checkbox" value="" asp-for="@listItem.Completed" onchange="this.form.submit()"/>
+                    <label asp-for="@listItem.ListItem">@listItem.ListItem</label>
+               </div>
+            </form>
+        }
+    </div>
+    <div class="col">
+        <h2>Packing List:</h2>
+        <form asp-controller="Checklist" asp-action="AddNewPackingItem" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="text" asp-for="PackedItem.ListItem" />
+        <button type="submit" class="btn btn-primary">Add</button>
     </form>
-}
+
+        @foreach (var packedItem in Model.PackingItems)
+        {
+            <form asp-controller="Checklist" asp-action="CheckedPackedList" method="post" asp-route-packingListId="@packedItem.PackingListId">
+                <div class="checkbox">
+                    <input type="hidden" asp-for="@packedItem.PackingListId" />
+                    <input type="checkbox" value="" asp-for="@packedItem.IsPacked" onchange="this.form.submit()" />
+                    <label asp-for="@packedItem.ListItem">@packedItem.ListItem</label>
+                </div>
+            </form>
+        }
+    </div>
+</div>

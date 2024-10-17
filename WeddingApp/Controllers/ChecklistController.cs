@@ -33,9 +33,11 @@ namespace WeddingApp.Controllers
         {
             //order: checked items on the bottom
             List<Checklists> checklist = _weddingDbContext.Checklists.OrderBy(c => c.Completed).ToList();
+            List<PackingList> packingList = _weddingDbContext.PackingList.OrderBy(p => p.IsPacked).ToList();
             ChecklistViewModel checklistView = new ChecklistViewModel()
             {
-                ChecklistItems = checklist
+                ChecklistItems = checklist,
+                PackingItems = packingList
             };
             return View("Checklist", checklistView);
         }
@@ -58,6 +60,20 @@ namespace WeddingApp.Controllers
             return RedirectToAction("GetChecklist", "Checklist");
         }
 
+        [HttpPost()]
+        public IActionResult AddNewPackingItem(ChecklistViewModel checklistViewModel)
+        {
+            PackingList packedItem = checklistViewModel.PackedItem;
+            if (packedItem != null)
+            {
+                packedItem.IsPacked = false;
+                packedItem.IsPurchased = false;
+                _weddingDbContext.PackingList.Add(packedItem);
+                _weddingDbContext.SaveChanges();
+            }
+            return RedirectToAction("GetChecklist", "Checklist");
+        }
+
         /// <summary>
         /// update the database tp display the item as checked, reload the page so checked items are below
         /// </summary>
@@ -67,7 +83,7 @@ namespace WeddingApp.Controllers
         public IActionResult CheckItem(int checklistId)
         {
             Checklists? item = _weddingDbContext.Checklists.Where(l => l.ChecklistId == checklistId).FirstOrDefault();
-            if (item.Completed == false && item != null)
+            if (!item.Completed && item != null)
             {
                 item.Completed = true;
             }
@@ -76,6 +92,23 @@ namespace WeddingApp.Controllers
                 item.Completed = false;
             }
             _weddingDbContext.Checklists.Update(item);
+            _weddingDbContext.SaveChanges();
+            return RedirectToAction("GetChecklist", "Checklist");
+        }
+
+        [HttpPost()]
+        public IActionResult CheckedPackedList(int packingListId)
+        {   
+            PackingList? item = _weddingDbContext.PackingList.Where(l => l.PackingListId == packingListId).FirstOrDefault();
+            if (!item.IsPacked)
+            {
+                item.IsPacked = true;
+            }
+            else
+            {
+                item.IsPacked = false;
+            }
+            _weddingDbContext.PackingList.Update(item);
             _weddingDbContext.SaveChanges();
             return RedirectToAction("GetChecklist", "Checklist");
         }

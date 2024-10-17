@@ -33,6 +33,8 @@ namespace WeddingApp.DataAccess
 
         public DbSet<DressCode> DressCode { get; set; }
 
+        public DbSet<PackingList> PackingList { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

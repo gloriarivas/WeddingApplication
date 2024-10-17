@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeddingApp.DataAccess;
 
@@ -11,9 +12,11 @@ using WeddingApp.DataAccess;
 namespace WeddingApp.Migrations
 {
     [DbContext(typeof(WeddingDbContext))]
-    partial class WeddingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241017134833_packingList")]
+    partial class packingList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,28 +181,6 @@ namespace WeddingApp.Migrations
                         .HasFilter("[PlusOneId] IS NOT NULL");
 
                     b.ToTable("Guests");
-                });
-
-            modelBuilder.Entity("WeddingAppDatabase.Entities.PackingList", b =>
-                {
-                    b.Property<int>("PackingListId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PackingListId"));
-
-                    b.Property<bool>("IsPacked")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPurchased")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ListItem")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PackingListId");
-
-                    b.ToTable("PackingList");
                 });
 
             modelBuilder.Entity("WeddingAppDatabase.Entities.Pictures", b =>
