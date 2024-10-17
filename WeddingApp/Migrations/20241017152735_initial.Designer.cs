@@ -12,8 +12,8 @@ using WeddingApp.DataAccess;
 namespace WeddingApp.Migrations
 {
     [DbContext(typeof(WeddingDbContext))]
-    [Migration("20241016145733_restaurantsInfo")]
-    partial class restaurantsInfo
+    [Migration("20241017152735_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,10 +125,16 @@ namespace WeddingApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DressCodeId"));
 
-                    b.Property<string>("BannedItems")
+                    b.Property<string>("BannedItemsMen")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("BannedItemsWomen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionMen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionWomen")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -165,16 +171,36 @@ namespace WeddingApp.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PlusOneId")
+                    b.Property<int?>("WeddingPartyId")
                         .HasColumnType("int");
 
                     b.HasKey("GuestId");
 
-                    b.HasIndex("PlusOneId")
-                        .IsUnique()
-                        .HasFilter("[PlusOneId] IS NOT NULL");
+                    b.HasIndex("WeddingPartyId");
 
                     b.ToTable("Guests");
+                });
+
+            modelBuilder.Entity("WeddingAppDatabase.Entities.PackingList", b =>
+                {
+                    b.Property<int>("PackingListId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PackingListId"));
+
+                    b.Property<bool>("IsPacked")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPurchased")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ListItem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PackingListId");
+
+                    b.ToTable("PackingList");
                 });
 
             modelBuilder.Entity("WeddingAppDatabase.Entities.Pictures", b =>
@@ -275,6 +301,29 @@ namespace WeddingApp.Migrations
                         });
                 });
 
+            modelBuilder.Entity("WeddingAppDatabase.Entities.PlusOnes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("InvitedGuestId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PlusOneId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvitedGuestId");
+
+                    b.HasIndex("PlusOneId");
+
+                    b.ToTable("PlusOnes");
+                });
+
             modelBuilder.Entity("WeddingAppDatabase.Entities.Restaurants", b =>
                 {
                     b.Property<int>("RestaurantId")
@@ -283,26 +332,20 @@ namespace WeddingApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RestaurantId"));
 
-                    b.Property<double?>("BreakfastHoursEnd")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("BreakfastHoursStart")
-                        .HasColumnType("float");
-
                     b.Property<string>("CuisineType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DressCodeId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("HasBreakfastHours")
-                        .HasColumnType("bit");
+                    b.Property<string>("HoursBreakfast")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("HoursEnd")
-                        .HasColumnType("float");
+                    b.Property<string>("HoursDinner")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("HoursStart")
-                        .HasColumnType("float");
+                    b.Property<string>("HoursLunch")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RestaurantDescription")
                         .HasColumnType("nvarchar(max)");
@@ -368,6 +411,25 @@ namespace WeddingApp.Migrations
                     b.ToTable("Tables");
                 });
 
+            modelBuilder.Entity("WeddingAppDatabase.Entities.WeddingParty", b =>
+                {
+                    b.Property<int>("PartyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PartyId"));
+
+                    b.Property<bool>("InWeddingParty")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PartyId");
+
+                    b.ToTable("WeddingParties");
+                });
+
             modelBuilder.Entity("WeddingAppDatabase.Entities.DietaryNeeds", b =>
                 {
                     b.HasOne("WeddingAppDatabase.Entities.Guests", "Guest")
@@ -381,12 +443,29 @@ namespace WeddingApp.Migrations
 
             modelBuilder.Entity("WeddingAppDatabase.Entities.Guests", b =>
                 {
-                    b.HasOne("WeddingAppDatabase.Entities.Guests", "Guest")
-                        .WithOne("GuestsList")
-                        .HasForeignKey("WeddingAppDatabase.Entities.Guests", "PlusOneId")
+                    b.HasOne("WeddingAppDatabase.Entities.WeddingParty", "WeddingParty")
+                        .WithMany("Guests")
+                        .HasForeignKey("WeddingPartyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("WeddingParty");
+                });
+
+            modelBuilder.Entity("WeddingAppDatabase.Entities.PlusOnes", b =>
+                {
+                    b.HasOne("WeddingAppDatabase.Entities.Guests", "InvitedGuest")
+                        .WithMany("InvitedGuests")
+                        .HasForeignKey("InvitedGuestId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("Guest");
+                    b.HasOne("WeddingAppDatabase.Entities.Guests", "PlusOne")
+                        .WithMany("PlusOnes")
+                        .HasForeignKey("PlusOneId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("InvitedGuest");
+
+                    b.Navigation("PlusOne");
                 });
 
             modelBuilder.Entity("WeddingAppDatabase.Entities.Restaurants", b =>
@@ -427,7 +506,9 @@ namespace WeddingApp.Migrations
                 {
                     b.Navigation("DietaryNeed");
 
-                    b.Navigation("GuestsList");
+                    b.Navigation("InvitedGuests");
+
+                    b.Navigation("PlusOnes");
 
                     b.Navigation("SeatingCharts");
                 });
@@ -435,6 +516,11 @@ namespace WeddingApp.Migrations
             modelBuilder.Entity("WeddingAppDatabase.Entities.Tables", b =>
                 {
                     b.Navigation("SeatingCharts");
+                });
+
+            modelBuilder.Entity("WeddingAppDatabase.Entities.WeddingParty", b =>
+                {
+                    b.Navigation("Guests");
                 });
 #pragma warning restore 612, 618
         }

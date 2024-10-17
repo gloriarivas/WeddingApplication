@@ -31,7 +31,14 @@ namespace WeddingApp.Controllers
         [HttpGet()]
         public IActionResult AddNewGuestRequest()
         {
-            return View("AddGuest");
+            List<WeddingParty> parties = _weddingDbContext.WeddingParties.ToList();
+            GuestViewModel model = new GuestViewModel()
+            {
+                ActiveGuest = new Guests(),
+                PartyRoles = parties
+            };
+                
+            return View("AddGuest", model);
         }
 
         /// <summary>
@@ -42,7 +49,6 @@ namespace WeddingApp.Controllers
         [HttpPost("/AddGuest")]
         public IActionResult AddNewGuest(GuestViewModel guestViewModel)
         {
-
             _weddingDbContext.Guests.Add(guestViewModel.ActiveGuest);
             _weddingDbContext.SaveChanges();
             return RedirectToAction("GetGuestList", "GuestList");
@@ -55,7 +61,7 @@ namespace WeddingApp.Controllers
         [HttpGet("/GuestList")]
         public IActionResult GetGuestList()
         {
-            List<Guests> guests = _weddingDbContext.Guests.OrderBy(g => g.LastName).ToList();
+            List<Guests> guests = _weddingDbContext.Guests.Include(w => w.WeddingParty).OrderBy(g => g.LastName).ToList();
             //turn the list into the view model then pass to the cshtml page
             GuestListViewModel guestList = new GuestListViewModel()
             {
@@ -73,9 +79,11 @@ namespace WeddingApp.Controllers
         [HttpGet("/EditGuest/{guestId}")]
         public IActionResult EditGuestRequest(int guestId)
         {
+            List<WeddingParty> parties = _weddingDbContext.WeddingParties.ToList();
             GuestViewModel guest = new GuestViewModel()
             {
-                ActiveGuest = GetGuestById(guestId)
+                ActiveGuest = GetGuestById(guestId),
+                PartyRoles = parties
             };
             return View("EditGuest", guest);
         }

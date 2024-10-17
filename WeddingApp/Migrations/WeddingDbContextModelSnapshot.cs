@@ -168,14 +168,12 @@ namespace WeddingApp.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PlusOneId")
+                    b.Property<int?>("WeddingPartyId")
                         .HasColumnType("int");
 
                     b.HasKey("GuestId");
 
-                    b.HasIndex("PlusOneId")
-                        .IsUnique()
-                        .HasFilter("[PlusOneId] IS NOT NULL");
+                    b.HasIndex("WeddingPartyId");
 
                     b.ToTable("Guests");
                 });
@@ -300,6 +298,29 @@ namespace WeddingApp.Migrations
                         });
                 });
 
+            modelBuilder.Entity("WeddingAppDatabase.Entities.PlusOnes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("InvitedGuestId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PlusOneId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvitedGuestId");
+
+                    b.HasIndex("PlusOneId");
+
+                    b.ToTable("PlusOnes");
+                });
+
             modelBuilder.Entity("WeddingAppDatabase.Entities.Restaurants", b =>
                 {
                     b.Property<int>("RestaurantId")
@@ -387,6 +408,25 @@ namespace WeddingApp.Migrations
                     b.ToTable("Tables");
                 });
 
+            modelBuilder.Entity("WeddingAppDatabase.Entities.WeddingParty", b =>
+                {
+                    b.Property<int>("PartyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PartyId"));
+
+                    b.Property<bool>("InWeddingParty")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PartyId");
+
+                    b.ToTable("WeddingParties");
+                });
+
             modelBuilder.Entity("WeddingAppDatabase.Entities.DietaryNeeds", b =>
                 {
                     b.HasOne("WeddingAppDatabase.Entities.Guests", "Guest")
@@ -400,12 +440,29 @@ namespace WeddingApp.Migrations
 
             modelBuilder.Entity("WeddingAppDatabase.Entities.Guests", b =>
                 {
-                    b.HasOne("WeddingAppDatabase.Entities.Guests", "Guest")
-                        .WithOne("GuestsList")
-                        .HasForeignKey("WeddingAppDatabase.Entities.Guests", "PlusOneId")
+                    b.HasOne("WeddingAppDatabase.Entities.WeddingParty", "WeddingParty")
+                        .WithMany("Guests")
+                        .HasForeignKey("WeddingPartyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("WeddingParty");
+                });
+
+            modelBuilder.Entity("WeddingAppDatabase.Entities.PlusOnes", b =>
+                {
+                    b.HasOne("WeddingAppDatabase.Entities.Guests", "InvitedGuest")
+                        .WithMany("InvitedGuests")
+                        .HasForeignKey("InvitedGuestId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("Guest");
+                    b.HasOne("WeddingAppDatabase.Entities.Guests", "PlusOne")
+                        .WithMany("PlusOnes")
+                        .HasForeignKey("PlusOneId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("InvitedGuest");
+
+                    b.Navigation("PlusOne");
                 });
 
             modelBuilder.Entity("WeddingAppDatabase.Entities.Restaurants", b =>
@@ -446,7 +503,9 @@ namespace WeddingApp.Migrations
                 {
                     b.Navigation("DietaryNeed");
 
-                    b.Navigation("GuestsList");
+                    b.Navigation("InvitedGuests");
+
+                    b.Navigation("PlusOnes");
 
                     b.Navigation("SeatingCharts");
                 });
@@ -454,6 +513,11 @@ namespace WeddingApp.Migrations
             modelBuilder.Entity("WeddingAppDatabase.Entities.Tables", b =>
                 {
                     b.Navigation("SeatingCharts");
+                });
+
+            modelBuilder.Entity("WeddingAppDatabase.Entities.WeddingParty", b =>
+                {
+                    b.Navigation("Guests");
                 });
 #pragma warning restore 612, 618
         }

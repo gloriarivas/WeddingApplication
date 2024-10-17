@@ -15,11 +15,6 @@ namespace WeddingAppDatabase.Entities
         public string? FirstName { get; set; }
 
         public string? LastName { get; set; }
-        
-        public int? PlusOneId { get; set; }
-        public Guests? Guest { get; set; }
-
-        public string? ExtraRole { get; set; }
 
         public string? PhoneNumber { get; set; }
         
@@ -27,10 +22,15 @@ namespace WeddingAppDatabase.Entities
         
         public string? Address { get; set; }
 
-        public Guests? GuestsList { get; set; }
+        public int? WeddingPartyId { get; set; }
+        public WeddingParty? WeddingParty { get; set; }
    
         public ICollection<SeatingChart>? SeatingCharts { get; set; }
 
         public DietaryNeeds? DietaryNeed { get; set; }
+
+        public ICollection<PlusOnes>? PlusOnes { get; set; }
+
+        public ICollection<PlusOnes>? InvitedGuests { get; set; }
     }
 }

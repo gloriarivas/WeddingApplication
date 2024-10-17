@@ -23,11 +23,15 @@
         <input type="text" asp-for="ActiveGuest.Address" />
     </div>
     <div class="form-group row">
-        <label asp-for="ActiveGuest.ExtraRole">Role:</label>
-        <input type="text" asp-for="ActiveGuest.ExtraRole" />
+        <label asp-for="ActiveGuest.WeddingPartyId">Role:</label>
+        <select asp-for="ActiveGuest.WeddingPartyId">
+            <option value="">Select a Role</option>
+            @foreach(WeddingAppDatabase.Entities.WeddingParty role in @Model.PartyRoles)
+            {
+                <option value="@role.PartyId">@role.Role</option>
+            }
+        </select>
+
     </div>
 
-@*     <form>
-        <button type="submit">Add Plus One</button>
-    </form> *@
 </div>

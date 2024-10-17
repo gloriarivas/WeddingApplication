@@ -35,18 +35,15 @@ namespace WeddingApp.DataAccess
 
         public DbSet<PackingList> PackingList { get; set; }
 
+        public DbSet<WeddingParty> WeddingParties { get; set; }
+
+        public DbSet<PlusOnes> PlusOnes { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //relationships
-            modelBuilder.Entity<Guests>()
-                .HasOne(g => g.Guest)
-                .WithOne(i => i.GuestsList)
-                .HasForeignKey<Guests>(g => g.PlusOneId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-
-            modelBuilder.Entity<DietaryNeeds>()
+           modelBuilder.Entity<DietaryNeeds>()
                 .HasOne(d => d.Guest)
                 .WithOne(g => g.DietaryNeed)
                 .HasForeignKey<DietaryNeeds>(d => d.GuestId)
@@ -70,6 +67,24 @@ namespace WeddingApp.DataAccess
                 .WithMany(r => r.Restaurants)
                 .HasForeignKey(d => d.DressCodeId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Guests>()
+                .HasOne(g => g.WeddingParty)
+                .WithMany(w => w.Guests)
+                .HasForeignKey(g => g.WeddingPartyId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<PlusOnes>()
+                .HasOne(p => p.PlusOne)
+                .WithMany(g => g.PlusOnes)
+                .HasForeignKey(p => p.PlusOneId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<PlusOnes>()
+                .HasOne(p => p.InvitedGuest)
+                .WithMany(g => g.InvitedGuests)
+                .HasForeignKey(p => p.InvitedGuestId)
+                .OnDelete(DeleteBehavior.NoAction);
                 
 
             modelBuilder.Entity<Pictures>().HasData(
