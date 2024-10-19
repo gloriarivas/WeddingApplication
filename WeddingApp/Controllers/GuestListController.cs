@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using WeddingApp.DataAccess;
 using WeddingApp.Models;
 using WeddingAppDatabase.Entities;
@@ -35,6 +36,7 @@ namespace WeddingApp.Controllers
             GuestViewModel model = new GuestViewModel()
             {
                 ActiveGuest = new Guests(),
+                PlusOne = new Guests(),
                 PartyRoles = parties
             };
                 
@@ -49,10 +51,27 @@ namespace WeddingApp.Controllers
         [HttpPost("/AddGuest")]
         public IActionResult AddNewGuest(GuestViewModel guestViewModel)
         {
+
             _weddingDbContext.Guests.Add(guestViewModel.ActiveGuest);
+            if (guestViewModel.PlusOne.FirstName != null) //add plus one and add the ids in Plus One table to match with their guest
+            {
+                _weddingDbContext.Guests.Add(guestViewModel.PlusOne);
+                _weddingDbContext.SaveChanges();
+                Guests? guest = AddPlusOne(guestViewModel.ActiveGuest.FirstName, guestViewModel.ActiveGuest.LastName);
+                Guests? plusOne = AddPlusOne(guestViewModel.PlusOne.FirstName, guestViewModel.PlusOne.LastName);
+                PlusOnes plusOneRelationship = new PlusOnes()
+                {
+                    InvitedGuestId = guestViewModel.ActiveGuest.GuestId,
+                    PlusOneId = guestViewModel.PlusOne.GuestId
+                };
+                _weddingDbContext.PlusOnes.Add(plusOneRelationship);
+            }
+
             _weddingDbContext.SaveChanges();
+
             return RedirectToAction("GetGuestList", "GuestList");
         }
+
 
         /// <summary>
         /// get req for guest list, outputs the list of guests
@@ -95,9 +114,12 @@ namespace WeddingApp.Controllers
         public IActionResult EditGuestRequest(int guestId)
         {
             List<WeddingParty> parties = _weddingDbContext.WeddingParties.ToList();
+            List<Guests> guests = GetGuestById(guestId);
+
             GuestViewModel guest = new GuestViewModel()
             {
-                ActiveGuest = GetGuestById(guestId),
+                ActiveGuest = guests[0],
+                PlusOne = guests[1],
                 PartyRoles = parties
             };
             return View("EditGuest", guest);
@@ -132,16 +154,18 @@ namespace WeddingApp.Controllers
             return RedirectToAction("GetGuestList", "GuestList");
         }
 
-        [HttpGet()]
-        public IActionResult AddPlusOne()
+        private List<Guests>? GetGuestById(int guestId)
         {
-
-            return View();
+            List<Guests> guests = new List<Guests>();
+            guests.Add(_weddingDbContext?.Guests.Where(g => g.GuestId == guestId).FirstOrDefault());
+            PlusOnes plusOne = _weddingDbContext?.PlusOnes.Where(p => p.InvitedGuestId == guestId).FirstOrDefault();
+            guests.Add(_weddingDbContext?.Guests.Where(g => g.GuestId == plusOne.PlusOneId).FirstOrDefault());
+            return guests;
+        }
+        private Guests AddPlusOne(string guestName, string lastName)
+        {
+            return _weddingDbContext?.Guests.Where(g => g.FirstName == guestName).Where(g => g.LastName == lastName).FirstOrDefault();
         }
 
-        private Guests? GetGuestById(int guestId)
-        {
-            return _weddingDbContext?.Guests.Where(g => g.GuestId == guestId).FirstOrDefault();
-        }
     }
 }
