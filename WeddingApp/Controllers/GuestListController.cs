@@ -157,8 +157,16 @@ namespace WeddingApp.Controllers
         private List<Guests>? GetGuestById(int guestId)
         {
             List<Guests> guests = new List<Guests>();
-            guests.Add(_weddingDbContext?.Guests.Where(g => g.GuestId == guestId).FirstOrDefault());
+
+            //check if guest is invited guest or a plus one
             PlusOnes plusOne = _weddingDbContext?.PlusOnes.Where(p => p.InvitedGuestId == guestId).FirstOrDefault();
+
+            if (_weddingDbContext?.PlusOnes.Where(p => p.InvitedGuestId == guestId).FirstOrDefault() == null)
+            {
+                plusOne = _weddingDbContext?.PlusOnes.Where(p => p.PlusOneId == guestId).FirstOrDefault();
+                
+            }
+            guests.Add(_weddingDbContext?.Guests.Where(g => g.GuestId == plusOne.InvitedGuestId).FirstOrDefault());
             guests.Add(_weddingDbContext?.Guests.Where(g => g.GuestId == plusOne.PlusOneId).FirstOrDefault());
             return guests;
         }
