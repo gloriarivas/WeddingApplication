@@ -1,0 +1,27 @@
+﻿@model DateViewModel
+<h2>New Event</h2>
+<form asp-controller="ImportantDates" asp-action="AddNewDate" method="post">
+    <div class="form-group">
+        <div class="form-group row">
+            <label asp-for="ActiveDate.DateName">Event Name</label>
+            <input type="text" asp-for="ActiveDate.DateName" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="ActiveDate.Description">Description</label>
+            <input type="text" asp-for="ActiveDate.Description" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="ActiveDate.DateStart">Event Start</label>
+            <input class="form-control" asp-for="ActiveDate.DateStart" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="ActiveDate.DateEnd">Event End</label>
+            <input class="form-control" asp-for="ActiveDate.DateEnd" />
+        </div><br />
+       
+        <button type="submit" class="btn btn-primary">Add Event</button>
+        <input type="reset" value="Clear" class="btn btn-primary">
+          
+    </div>
+
+</form>

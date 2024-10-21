@@ -28,16 +28,14 @@ namespace WeddingApp.Controllers
             };
             return View("ImportantDates", dateViewModel);
         }
-        //[HttpGet("/Checklist")]
-        //public IActionResult GetChecklist()
-        //{
-        //    //order: checked items on the bottom
-        //    List<Checklists> checklist = _weddingDbContext.Checklists.OrderBy(c => c.Completed).ToList();
-        //    ChecklistViewModel checklistView = new ChecklistViewModel()
-        //    {
-        //        ChecklistItems = checklist
-        //    };
-        //    return View("Checklist", checklistView);
-        //}
+
+        [HttpPost()]
+        public IActionResult AddNewDate(DateViewModel viewModel)
+        {
+            _weddingDbContext.Dates.Add(viewModel.ActiveDate);
+            _weddingDbContext.SaveChanges();
+
+            return RedirectToAction("GetDates", "ImportantDates");
+        }
     }
 }

@@ -131,11 +131,16 @@ namespace WeddingApp.Controllers
         /// <param name="guestViewModel"></param>
         /// <returns></returns>
         [HttpPost()]
-        public IActionResult EditGuest(GuestViewModel guestViewModel, int guestId)
+        public IActionResult EditGuest(GuestViewModel guestViewModel, int guestId, int plusOneId)
         {
             //for some reason view model isn't passing the id, so re-add it before updating db
             guestViewModel.ActiveGuest.GuestId = guestId;
             _weddingDbContext.Guests.Update(guestViewModel.ActiveGuest);
+            if (plusOneId != 0)
+            {
+                guestViewModel.PlusOne.GuestId = plusOneId;
+                _weddingDbContext.Guests.Update(guestViewModel.PlusOne);
+            }
             _weddingDbContext.SaveChanges();
 
             return RedirectToAction("GetGuestList", "GuestList");

@@ -2,10 +2,41 @@
 @{
     ViewData["Title"] = "Important Dates";
 }
-<h1>TODO:</h1>
-<ul>
-    <li>Add/edit</li>
-    <li>Create list view of dates ordered by date</li>
-    <li>add calendar with all dates</li>
-    <li></li>
-</ul>
+<h1>Important Dates</h1>
+<div class="row">
+    <div class="col-9">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var eventTime in Model.Dates)
+                {
+                    <tr>
+                        <td>@eventTime.DateName</td>
+                        <td>@eventTime.Description</td>
+                        <td>@eventTime.DateStart</td>
+                        <td>@eventTime.DateEnd</td>
+                        <td>
+                            <input type="hidden" asp-for="@eventTime.DateId" />
+                            <a asp-controller="ImportantDates" asp-action="EditDateRequest" asp-route-dateId="@eventTime.DateId">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <ul>
+            <li>Add/edit</li>
+            <li>Create list view of dates ordered by date Create list view of dates ordered by date Create list view of dates ordered by date Create list view of dates ordered by date Create list view of dates ordered by date Create list view of dates ordered by date</li>
+            <li>add calendar with all dates</li>
+        </ul>
+    </div>
+    <div class="col-3">
+        <partial name="_AddNewDatePartial" />
+    </div>
+</div>
