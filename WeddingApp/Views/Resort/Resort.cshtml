@@ -5,6 +5,7 @@
 
 <h2>Restaurants</h2>
 <div class="row">
+    <a asp-controller="Resort" asp-action="AddRestaurantRequest">Add Restaurant Info</a>
 @foreach (var item in Model.Restaurants)
 {
     <div class="col-sm-4 mb-3 mb-sm-0">
@@ -25,6 +26,7 @@
 </div>
 
 <h2>Bars</h2>
+<a asp-controller="Resort" asp-action="AddBar">Add Bar Info</a>
 <div class="row">
     @foreach (var item in Model.Bars)
     {
@@ -46,14 +48,17 @@
     }
 </div>
 <h2>Event Spaces</h2>
+<a asp-controller="Resort" asp-action="AddEventSpace">Add Event Space Info</a>
 
 <h2>Dress Code</h2>
+<a asp-controller="Resort" asp-action="AddDressCodeRequest">Add Dress Code Info</a>
 <table class="table table-bordered">
     <thead class="table-light">
         <tr>
             <th>Title</th>
             <th>Women</th>
             <th>Men</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -73,6 +78,7 @@
                     <td class="fw-bold">@code.Title</td>
                     <td>@code.DescriptionWomen <br />No: @code.BannedItemsWomen</td>
                     <td>@code.DescriptionMen <br />No: @code.BannedItemsMen</td>
+                    <td><a asp-controller="Resort" asp-action="EditDressCodeRequest" asp-route-dressCodeId="@code.DressCodeId">Edit</a></td>
                 </tr>
             }
         }

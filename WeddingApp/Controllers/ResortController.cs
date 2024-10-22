@@ -33,5 +33,53 @@ namespace WeddingApp.Controllers
 
             return View("Resort", resortInfoViewModel);
         }
+
+        [HttpGet("/NewRestaurant")]
+        public IActionResult AddRestaurantRequest()
+        {
+            return View();
+        }
+
+        [HttpGet("/AddDressCode")]
+        public IActionResult AddDressCodeRequest()
+        {
+            DressCodeViewModel dressCode = new DressCodeViewModel()
+            {
+                ActiveDressCode = new DressCode()
+            };
+            return View("AddDressCode",dressCode);
+        }
+
+        [HttpPost()]
+        public IActionResult AddDressCode(DressCodeViewModel dressCode)
+        {
+            _weddingDbContext.DressCode.Add(dressCode.ActiveDressCode);
+            _weddingDbContext.SaveChanges();
+            return RedirectToAction("GetResortInfo", "Resort");
+        }
+
+        [HttpGet("/EditDressCode/{dressCodeId}")]
+        public IActionResult EditDressCodeRequest(int dressCodeId)
+        {
+            DressCodeViewModel dressCode = new DressCodeViewModel()
+            {
+                ActiveDressCode = GetDressCodeById(dressCodeId)
+            };
+            return View("EditDressCode", dressCode);
+        }
+
+        [HttpPost()]
+        public IActionResult EditDressCode(DressCodeViewModel dressCodeModel, int dressCodeId)
+        {
+            dressCodeModel.ActiveDressCode.DressCodeId = dressCodeId;
+            _weddingDbContext.DressCode.Update(dressCodeModel.ActiveDressCode);
+            _weddingDbContext.SaveChanges();
+            return RedirectToAction("GetResortInfo", "Resort");
+        }
+
+        private DressCode? GetDressCodeById(int dressCodeId)
+        {
+            return _weddingDbContext.DressCode.Where(d => d.DressCodeId == dressCodeId).FirstOrDefault();
+        }
     }
 }

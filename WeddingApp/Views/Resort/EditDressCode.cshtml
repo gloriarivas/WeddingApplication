@@ -1,0 +1,10 @@
+﻿@model DressCodeViewModel
+@{
+    ViewData["Title"] = "Edit Dress Code";
+}
+<form asp-controller="Resort" asp-action="EditDressCode" method="post" enctype="application/x-www-form-urlencoded" asp-route-dressCodeId="@Model.ActiveDressCode.DressCodeId">
+    <partial name="_DressCodeAddEditPartial" />
+    <br />
+    <button type="submit" class="btn btn-primary">Edit</button>
+    <a asp-controller="Resort" asp-action="GetResortInfo" class="btn btn-primary">Cancel</a>
+</form>
