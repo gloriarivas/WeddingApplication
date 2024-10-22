@@ -40,6 +40,27 @@ namespace WeddingApp.Controllers
             return View();
         }
 
+        [HttpGet("/AddNewBar")]
+        public IActionResult AddBarRequest()
+        {
+            BarViewModel bar = new BarViewModel()
+            {
+                ActiveBar = new Bars()
+            };
+            return View("AddBar", bar);
+        }
+
+        [HttpPost()]
+        public IActionResult AddBar(BarViewModel barViewModel)
+        {
+            //add am and pm
+            barViewModel.ActiveBar.HoursStart += barViewModel.HoursStartAmPm;
+            barViewModel.ActiveBar.HoursEnd += barViewModel.HoursEndAmPm;
+            _weddingDbContext.Bars.Add(barViewModel.ActiveBar);
+            _weddingDbContext.SaveChanges();
+            return RedirectToAction("GetResortInfo", "Resort");
+        }
+
         [HttpGet("/AddDressCode")]
         public IActionResult AddDressCodeRequest()
         {

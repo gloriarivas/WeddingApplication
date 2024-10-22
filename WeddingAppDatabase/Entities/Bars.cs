@@ -18,8 +18,8 @@ namespace WeddingAppDatabase.Entities
 
         public string? SpecialInstructions { get; set; }
 
-        public double? HoursStart { get; set; }
+        public string? HoursStart { get; set; }
 
-        public double? HoursEnd { get; set; }
+        public string? HoursEnd { get; set; }
     }
 }

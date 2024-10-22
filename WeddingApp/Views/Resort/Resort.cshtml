@@ -26,7 +26,7 @@
 </div>
 
 <h2>Bars</h2>
-<a asp-controller="Resort" asp-action="AddBar">Add Bar Info</a>
+<a asp-controller="Resort" asp-action="AddBarRequest">Add Bar Info</a>
 <div class="row">
     @foreach (var item in Model.Bars)
     {
@@ -68,6 +68,7 @@
             {
                 <tr>
                     <td class="fw-bold">@code.Title</td>
+                    <td></td>
                     <td></td>
                     <td></td>
                 </tr>
