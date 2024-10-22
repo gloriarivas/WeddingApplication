@@ -22,7 +22,7 @@ namespace WeddingApp.Controllers
 
         public IActionResult GuestList()
         {
-            return View();
+            return RedirectToAction("GetGuestList", "GuestList");
         }
 
         /// <summary>
