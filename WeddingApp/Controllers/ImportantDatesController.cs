@@ -37,5 +37,31 @@ namespace WeddingApp.Controllers
 
             return RedirectToAction("GetDates", "ImportantDates");
         }
+
+        [HttpGet("EditEvent")]
+        public IActionResult EditDateRequest(int dateId)
+        {
+            Dates dates = GetEventById(dateId);
+            DateViewModel dateViewModel = new DateViewModel()
+            {
+                ActiveDate = dates
+            };
+            return View("EditEvent",dateViewModel);
+        }
+
+        [HttpPost()]
+        public IActionResult EditDate(DateViewModel dateViewModel, int DateId)
+        {
+            dateViewModel.ActiveDate.DateId = DateId;
+            _weddingDbContext.Dates.Update(dateViewModel.ActiveDate);
+            _weddingDbContext.SaveChanges();
+            return RedirectToAction("GetDates", "ImportantDates");
+        }
+
+        private Dates GetEventById(int eventId)
+        {
+            return _weddingDbContext.Dates.Where(d => d.DateId == eventId).FirstOrDefault();
+
+        }
     }
 }

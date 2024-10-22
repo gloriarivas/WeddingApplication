@@ -30,13 +30,15 @@
                 }
             </tbody>
         </table>
-        <ul>
-            <li>Add/edit</li>
-            <li>Create list view of dates ordered by date Create list view of dates ordered by date Create list view of dates ordered by date Create list view of dates ordered by date Create list view of dates ordered by date Create list view of dates ordered by date</li>
-            <li>add calendar with all dates</li>
-        </ul>
+        <p>TODO: create a calendar view</p>
+
     </div>
     <div class="col-3">
-        <partial name="_AddNewDatePartial" />
+        <h2>New Event</h2>
+        <form asp-controller="ImportantDates" asp-action="AddNewDate" method="post">
+            <partial name="_AddNewDatePartial" />
+            <button type="submit" class="btn btn-primary">Add Event</button>
+            <input type="reset" value="Clear" class="btn btn-primary">
+        </form>
     </div>
 </div>

@@ -1,6 +1,4 @@
 ﻿@model DateViewModel
-<h2>New Event</h2>
-<form asp-controller="ImportantDates" asp-action="AddNewDate" method="post">
     <div class="form-group">
         <div class="form-group row">
             <label asp-for="ActiveDate.DateName">Event Name</label>
@@ -18,10 +16,4 @@
             <label asp-for="ActiveDate.DateEnd">Event End</label>
             <input class="form-control" asp-for="ActiveDate.DateEnd" />
         </div><br />
-       
-        <button type="submit" class="btn btn-primary">Add Event</button>
-        <input type="reset" value="Clear" class="btn btn-primary">
-          
     </div>
-
-</form>
