@@ -4,4 +4,5 @@
     <partial name="_AddNewDatePartial" />
     <button type="submit" class="btn btn-primary">Edit Event</button>
     <a class="btn btn-primary" asp-area="" asp-controller="ImportantDates" asp-action="GetDates">Cancel</a>
+    <a class="btn btn-primary" asp-area="" asp-controller="ImportantDates" asp-action="DeleteEvent" asp-route-dateId="@Model.ActiveDate.DateId">Delete</a>
 </form>

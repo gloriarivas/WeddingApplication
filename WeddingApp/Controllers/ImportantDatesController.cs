@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WeddingApp.DataAccess;
 using WeddingApp.Models;
 using WeddingAppDatabase.Entities;
@@ -55,6 +56,12 @@ namespace WeddingApp.Controllers
             dateViewModel.ActiveDate.DateId = DateId;
             _weddingDbContext.Dates.Update(dateViewModel.ActiveDate);
             _weddingDbContext.SaveChanges();
+            return RedirectToAction("GetDates", "ImportantDates");
+        }
+
+        public IActionResult DeleteEvent(int dateId)
+        {
+            _weddingDbContext.Dates.Where(d => d.DateId == dateId).ExecuteDelete();
             return RedirectToAction("GetDates", "ImportantDates");
         }
 
