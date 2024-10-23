@@ -72,6 +72,41 @@ namespace WeddingApp.Controllers
             return RedirectToAction("GetResortInfo", "Resort");
         }
 
+        [HttpGet("/EditRestaurant/{id}")]
+        public IActionResult EditRestaurantRequest(int id)
+        {
+            Restaurants? restaurant = GetRestaurantById(id);
+            List<DressCode> dressCode = _weddingDbContext.DressCode.ToList();
+            RestaurantViewModel model = new RestaurantViewModel()
+            {
+                DressCodes = dressCode,
+                ActiveRestaurant = restaurant
+            };
+            if (restaurant.HoursBreakfastStart != null)
+            {
+                model.HoursStartBreakfastAmPm = restaurant.HoursBreakfastStart.Substring(restaurant.HoursBreakfastStart.Length - 2);
+                model.HoursEndBreakfastAmPm = restaurant.HoursBreakfastEnd.Substring(restaurant.HoursBreakfastEnd.Length - 2);
+                model.HoursStartBreakfast = restaurant.HoursBreakfastStart.Substring(0, restaurant.HoursBreakfastStart.Length - 2);
+                model.HoursEndBreakfast = restaurant.HoursBreakfastEnd.Substring(0, restaurant.HoursBreakfastEnd.Length - 2);
+            }
+            if (restaurant.HoursLunchStart != null)
+            {
+                model.HoursStartLunchAmPm = restaurant.HoursLunchStart.Substring(restaurant.HoursLunchStart.Length - 2);
+                model.HoursEndLunchAmPm = restaurant.HoursLunchEnd.Substring(restaurant.HoursLunchEnd.Length - 2);
+                model.HoursStartLunch = restaurant.HoursLunchStart.Substring(0, restaurant.HoursLunchStart.Length - 2);
+                model.HoursEndLunch = restaurant.HoursLunchEnd.Substring(0, restaurant.HoursLunchEnd.Length - 2);
+            }
+            if (restaurant.HoursDinnerStart != null)
+            {
+                model.HoursStartDinnerAmPm = restaurant.HoursDinnerStart.Substring(restaurant.HoursDinnerStart.Length - 2);
+                model.HoursEndDinnerAmPm = restaurant.HoursDinnerEnd.Substring(restaurant.HoursDinnerEnd.Length - 2);
+                model.HoursStartDinner = restaurant.HoursDinnerStart.Substring(0, restaurant.HoursDinnerStart.Length - 2);
+                model.HoursEndDinner = restaurant.HoursDinnerEnd.Substring(0, restaurant.HoursDinnerEnd.Length - 2);
+            }
+            
+            return View("EditRestaurant", model);
+        }
+
         [HttpGet("/AddNewBar")]
         public IActionResult AddBarRequest()
         {
@@ -170,6 +205,10 @@ namespace WeddingApp.Controllers
         private Bars? GetBarById(int id)
         {
             return _weddingDbContext.Bars.Where(b => b.BarId == id).FirstOrDefault();
+        }
+        private Restaurants? GetRestaurantById(int id)
+        {
+            return _weddingDbContext.Restaurants.Where(r => r.RestaurantId == id).FirstOrDefault();
         }
     }
 }

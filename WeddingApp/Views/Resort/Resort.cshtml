@@ -11,23 +11,27 @@
     <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="card">
             <div class="card-body">
-                <h5>@item.RestaurantName</h5>
+                <h4>@item.RestaurantName</h4>
                 <p>
                     Cuisine: @item.CuisineType <br />
                     Description: @item.RestaurantDescription<br />
                     Dress Code: @item.DressCode.Title <br />
-                    Hours:<br /> @if (item.HoursBreakfastEnd != null)
-                        {
-                            <i>Breakfast:@item.HoursBreakfastStart - @item.HoursBreakfastEnd</i><br />
-                        }
-                        @if (item.HoursLunchStart != null)
-                        {
-                            <i>Lunch:@item.HoursLunchStart - @item.HoursLunchEnd</i><br />
-                        }
-                        @if (item.HoursDinnerStart != null)
-                        {
-                            <i>Dinner:@item.HoursDinnerStart - @item.HoursDinnerEnd</i>
-                        }
+                    Hours:<br /> 
+                    @if (item.HoursBreakfastEnd != null)
+                    {
+                        <i>Breakfast:@item.HoursBreakfastStart - @item.HoursBreakfastEnd</i><br />
+                    }
+                    @if (item.HoursLunchStart != null)
+                    {
+                        <i>Lunch:@item.HoursLunchStart - @item.HoursLunchEnd</i><br />
+                    }
+                    @if (item.HoursDinnerStart != null)
+                    {
+                        <i>Dinner:@item.HoursDinnerStart - @item.HoursDinnerEnd</i><br />
+                    }
+                    <a asp-controller="Resort" asp-action="EditRestaurantRequest" asp-route-id="@item.RestaurantId">Edit</a>
+                    <span>|</span>
+                    <a>Delete</a>
             </div>
         </div>
         <br />
