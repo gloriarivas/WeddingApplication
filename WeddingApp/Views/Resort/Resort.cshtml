@@ -39,7 +39,9 @@
                        @if(@item.SpecialInstructions != ""){
                             <i>@item.SpecialInstructions</i> <br />
                        }
-                       Hours: @item.HoursStart - @item.HoursEnd
+                       Hours: @item.HoursStart - @item.HoursEnd <br />
+                       <a asp-controller="Resort" asp-action="EditBarRequest" asp-route-id="@item.BarId">Edit</a>
+                        <a asp-controller="Resort" asp-action="DeleteBar" asp-route-barId="@item.BarId">Delete</a>
                     </p>
                 </div>
             </div>

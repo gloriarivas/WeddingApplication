@@ -1,0 +1,14 @@
+﻿@model BarViewModel
+@{
+    ViewData["Title"] = "Edit Bar";
+}
+<div class="col-6" style="margin:auto">
+    <h3>Edit Bar</h3>
+    <form class="border border-3 rounded" style="padding:15px" asp-controller="Resort" asp-action="EditBar" asp-route-barId="@Model.ActiveBar.BarId" method="post">
+        <partial name="_BarAddEditPartial" />
+        <br />
+        <button type="submit" class="btn btn-primary">Edit</button>
+        <a asp-controller="Resort" asp-action="GetResortInfo" class="btn btn-primary">Cancel</a>
+    </form>
+
+</div>

@@ -61,6 +61,39 @@ namespace WeddingApp.Controllers
             return RedirectToAction("GetResortInfo", "Resort");
         }
 
+        [HttpGet("/EditBar/{id}")]
+        public IActionResult EditBarRequest(int id)
+        {
+            Bars? bar = GetBarById(id);
+            BarViewModel barView = new BarViewModel()
+            {
+                ActiveBar = bar,
+                HoursStartAmPm = bar.HoursStart.Substring(bar.HoursStart.Length - 2),
+                HoursEndAmPm = bar.HoursEnd.Substring(bar.HoursEnd.Length - 2)
+            };
+            barView.ActiveBar.HoursStart = bar.HoursStart.Substring(0,bar.HoursStart.Length-2);
+            barView.ActiveBar.HoursEnd = bar.HoursEnd.Substring(0,bar.HoursEnd.Length-2);
+            return View("EditBar", barView);
+        }
+
+
+        [HttpPost()]
+        public IActionResult EditBar(BarViewModel barViewModel, int barId)
+        {
+            barViewModel.ActiveBar.BarId = barId;
+            barViewModel.ActiveBar.HoursStart += barViewModel.HoursStartAmPm;
+            barViewModel.ActiveBar.HoursEnd += barViewModel.HoursEndAmPm;
+            _weddingDbContext.Bars.Update(barViewModel.ActiveBar);
+            _weddingDbContext.SaveChanges();
+            return RedirectToAction("GetResortInfo", "Resort");
+        }
+
+        public IActionResult DeleteBar(int barId)
+        {
+            _weddingDbContext.Bars.Where(b => b.BarId == barId).ExecuteDelete();
+            return RedirectToAction("GetResortInfo", "Resort");
+        }
+
         [HttpGet("/AddDressCode")]
         public IActionResult AddDressCodeRequest()
         {
@@ -101,6 +134,10 @@ namespace WeddingApp.Controllers
         private DressCode? GetDressCodeById(int dressCodeId)
         {
             return _weddingDbContext.DressCode.Where(d => d.DressCodeId == dressCodeId).FirstOrDefault();
+        }
+        private Bars? GetBarById(int id)
+        {
+            return _weddingDbContext.Bars.Where(b => b.BarId == id).FirstOrDefault();
         }
     }
 }
