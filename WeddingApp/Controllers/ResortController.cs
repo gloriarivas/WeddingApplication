@@ -37,7 +37,39 @@ namespace WeddingApp.Controllers
         [HttpGet("/NewRestaurant")]
         public IActionResult AddRestaurantRequest()
         {
-            return View();
+            List<DressCode> dressCode = _weddingDbContext.DressCode.ToList();
+            RestaurantViewModel restaurant = new RestaurantViewModel()
+            {
+                ActiveRestaurant = new Restaurants(),
+                DressCodes = dressCode
+            };
+            return View("AddRestaurant", restaurant);
+        }
+
+        [HttpPost()]
+        public IActionResult AddRestaurant(RestaurantViewModel viewModel)
+        {
+            //add am/pm to each dinner hours col
+            if (viewModel.HoursStartBreakfast != null)
+            {
+                viewModel.ActiveRestaurant.HoursBreakfastStart = viewModel.HoursStartBreakfast + viewModel.HoursStartBreakfastAmPm;
+                viewModel.ActiveRestaurant.HoursBreakfastEnd = viewModel.HoursEndBreakfast + viewModel.HoursEndBreakfastAmPm;
+            }
+            if (viewModel.HoursStartLunch != null)
+            {
+                viewModel.ActiveRestaurant.HoursLunchStart = viewModel.HoursStartLunch + viewModel.HoursStartLunchAmPm;
+                viewModel.ActiveRestaurant.HoursLunchEnd = viewModel.HoursEndLunch + viewModel.HoursEndLunchAmPm;
+
+            }
+            if (viewModel.HoursStartDinner != null)
+            {
+                viewModel.ActiveRestaurant.HoursDinnerStart = viewModel.HoursStartDinner + viewModel.HoursStartDinnerAmPm;
+                viewModel.ActiveRestaurant.HoursDinnerEnd = viewModel.HoursEndDinner + viewModel.HoursEndDinnerAmPm;
+            }
+
+            _weddingDbContext.Restaurants.Add(viewModel.ActiveRestaurant);
+            _weddingDbContext.SaveChanges();
+            return RedirectToAction("GetResortInfo", "Resort");
         }
 
         [HttpGet("/AddNewBar")]

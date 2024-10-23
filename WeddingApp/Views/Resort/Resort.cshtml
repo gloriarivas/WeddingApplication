@@ -16,8 +16,18 @@
                     Cuisine: @item.CuisineType <br />
                     Description: @item.RestaurantDescription<br />
                     Dress Code: @item.DressCode.Title <br />
-                    Hours: @item.HoursBreakfast <br /> @item.HoursLunch <br /> @item.HoursDinner
-                </p>
+                    Hours:<br /> @if (item.HoursBreakfastEnd != null)
+                        {
+                            <i>Breakfast:@item.HoursBreakfastStart - @item.HoursBreakfastEnd</i><br />
+                        }
+                        @if (item.HoursLunchStart != null)
+                        {
+                            <i>Lunch:@item.HoursLunchStart - @item.HoursLunchEnd</i><br />
+                        }
+                        @if (item.HoursDinnerStart != null)
+                        {
+                            <i>Dinner:@item.HoursDinnerStart - @item.HoursDinnerEnd</i>
+                        }
             </div>
         </div>
         <br />
@@ -41,6 +51,7 @@
                        }
                        Hours: @item.HoursStart - @item.HoursEnd <br />
                        <a asp-controller="Resort" asp-action="EditBarRequest" asp-route-id="@item.BarId">Edit</a>
+                       <span>|</span>
                         <a asp-controller="Resort" asp-action="DeleteBar" asp-route-barId="@item.BarId">Delete</a>
                     </p>
                 </div>

@@ -21,10 +21,13 @@ namespace WeddingAppDatabase.Entities
         public int? DressCodeId { get; set; }
         public DressCode? DressCode { get; set; }
 
-        public string? HoursBreakfast { get; set; }
+        public string? HoursBreakfastStart { get; set; }
+        public string? HoursBreakfastEnd { get; set; }
 
-        public string? HoursLunch { get; set; }
+        public string? HoursLunchStart { get; set; }
+        public string? HoursLunchEnd { get; set; }
 
-        public string? HoursDinner { get; set; }
+        public string? HoursDinnerStart { get; set; }
+        public string? HoursDinnerEnd { get; set; }
     }
 }

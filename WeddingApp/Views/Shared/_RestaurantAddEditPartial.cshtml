@@ -1,0 +1,98 @@
+﻿@model RestaurantViewModel
+
+<div class="form-group">
+    <div class="mb-3">
+        <label asp-for="ActiveRestaurant.RestaurantName" class="form-label">Name</label>
+        <input type="text" asp-for="ActiveRestaurant.RestaurantName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ActiveRestaurant.RestaurantDescription" class="form-label">Description</label>
+        <textarea asp-for="ActiveRestaurant.RestaurantDescription" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ActiveRestaurant.CuisineType" class="form-label">Cuisine Type</label>
+        <input type="text" asp-for="ActiveRestaurant.CuisineType" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ActiveRestaurant.DressCodeId" class="form-label">Dress Code</label>
+        <select asp-for="ActiveRestaurant.DressCodeId" class="form-control">
+            <option value="">Select a Dress Code</option>
+            @foreach (WeddingAppDatabase.Entities.DressCode code in @Model.DressCodes)
+            {
+                <option value="@code.DressCodeId">@code.Title</option>
+            }
+        </select>
+    </div>
+    <div class="form-group row">
+        <label asp-for="HoursStartBreakfast" class="form-label">Breakfast Hours:</label>
+        <div class="col-md-3">
+            <input type="text" asp-for="HoursStartBreakfast" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <select asp-for="HoursStartBreakfastAmPm" class="form-control">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <p style="text-align:center">to:</p>
+        </div>
+        <div class="col-md-3">
+            <input type="text" asp-for="HoursEndBreakfast" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <select asp-for="HoursEndBreakfastAmPm" class="form-control">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="HoursStartLunch" class="form-label">Lunch Hours:</label>
+        <div class="col-md-3">
+            <input type="text" asp-for="HoursStartLunch" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <select asp-for="HoursStartLunchAmPm" class="form-control">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <p style="text-align:center">to:</p>
+        </div>
+        <div class="col-md-3">
+            <input type="text" asp-for="HoursEndLunch" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <select asp-for="HoursEndLunchAmPm" class="form-control">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="HoursStartDinner" class="form-label">Dinner Hours:</label>
+        <div class="col-md-3">
+            <input type="text" asp-for="HoursStartDinner" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <select asp-for="HoursStartDinnerAmPm" class="form-control">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <p style="text-align:center">to:</p>
+        </div>
+        <div class="col-md-3">
+            <input type="text" asp-for="HoursEndDinner" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <select asp-for="HoursEndDinnerAmPm" class="form-control">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
+        </div>
+    </div>
+</div>
