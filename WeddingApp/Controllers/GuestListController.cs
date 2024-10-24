@@ -163,9 +163,9 @@ namespace WeddingApp.Controllers
                 _weddingDbContext.PlusOnes.Where(g => g.InvitedGuestId == guests[0].GuestId).ExecuteDelete();
                 if (guestId == guests[0].GuestId) //if guest is the plus one, just delete the relationship and the guest
                 {
-                    _weddingDbContext.Guests.Where(g => g.GuestId == guests[1].GuestId).ExecuteDelete();
+                    _weddingDbContext.Guests.Where(g => g.GuestId == guests[0].GuestId).ExecuteDelete();
                 }
-                _weddingDbContext.Guests.Where(g => g.GuestId == guests[0].GuestId).ExecuteDelete();
+                _weddingDbContext.Guests.Where(g => g.GuestId == guests[1].GuestId).ExecuteDelete();
                 return RedirectToAction("GetGuestList", "GuestList");
             }
             _weddingDbContext.Guests.Where(g => g.GuestId == guestId).ExecuteDelete();
