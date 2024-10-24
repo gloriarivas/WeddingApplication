@@ -119,9 +119,12 @@ namespace WeddingApp.Controllers
             GuestViewModel guest = new GuestViewModel()
             {
                 ActiveGuest = guests[0],
-                PlusOne = guests[1],
                 PartyRoles = parties
             };
+            if (guests.Count >= 2)
+            {
+                guest.PlusOne = guests[1];
+            }
             return View("EditGuest", guest);
         }
 
@@ -131,14 +134,12 @@ namespace WeddingApp.Controllers
         /// <param name="guestViewModel"></param>
         /// <returns></returns>
         [HttpPost()]
-        public IActionResult EditGuest(GuestViewModel guestViewModel, int guestId, int plusOneId)
+        public IActionResult EditGuest(GuestViewModel guestViewModel)
         {
-            //for some reason view model isn't passing the id, so re-add it before updating db
-            guestViewModel.ActiveGuest.GuestId = guestId;
+            
             _weddingDbContext.Guests.Update(guestViewModel.ActiveGuest);
-            if (plusOneId != 0)
+            if (guestViewModel.PlusOne.GuestId != 0)
             {
-                guestViewModel.PlusOne.GuestId = plusOneId;
                 _weddingDbContext.Guests.Update(guestViewModel.PlusOne);
             }
             _weddingDbContext.SaveChanges();
@@ -164,11 +165,19 @@ namespace WeddingApp.Controllers
             List<Guests> guests = new List<Guests>();
 
             //check if guest is invited guest or a plus one
-            PlusOnes plusOne = _weddingDbContext?.PlusOnes.Where(p => p.InvitedGuestId == guestId).FirstOrDefault();
+            PlusOnes invited = _weddingDbContext?.PlusOnes.Where(p => p.InvitedGuestId == guestId).FirstOrDefault();
+            PlusOnes plusOne = _weddingDbContext?.PlusOnes.Where(p => p.PlusOneId == guestId).FirstOrDefault();
 
-            if (_weddingDbContext?.PlusOnes.Where(p => p.InvitedGuestId == guestId).FirstOrDefault() == null)
+            if (invited == null && plusOne == null) //if not in table at all, then guest does not have a plus one
             {
-                plusOne = _weddingDbContext?.PlusOnes.Where(p => p.PlusOneId == guestId).FirstOrDefault();
+                guests.Add(_weddingDbContext?.Guests.Where(g => g.GuestId == guestId).FirstOrDefault());
+                return guests;
+            }
+            if (invited != null)
+            {
+                guests.Add(_weddingDbContext?.Guests.Where(g => g.GuestId == invited.InvitedGuestId).FirstOrDefault());
+                guests.Add(_weddingDbContext?.Guests.Where(g => g.GuestId == invited.PlusOneId).FirstOrDefault());
+                return guests;
                 
             }
             guests.Add(_weddingDbContext?.Guests.Where(g => g.GuestId == plusOne.InvitedGuestId).FirstOrDefault());
