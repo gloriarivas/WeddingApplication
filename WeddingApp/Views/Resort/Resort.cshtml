@@ -31,7 +31,7 @@
                     }
                     <a asp-controller="Resort" asp-action="EditRestaurantRequest" asp-route-id="@item.RestaurantId">Edit</a>
                     <span>|</span>
-                    <a>Delete</a>
+                        <a asp-controller="Resort" asp-action="DeleteRestaurant" asp-route-restaurantId="@item.RestaurantId">Delete</a>
             </div>
         </div>
         <br />

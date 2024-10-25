@@ -4,9 +4,10 @@
 }
 <div class="col-6" style="margin:auto">
     <h3>Edit Bar</h3>
-    <form class="border border-3 rounded" style="padding:15px" asp-controller="Resort" asp-action="EditBar" asp-route-barId="@Model.ActiveBar.BarId" method="post">
+    <form class="border border-3 rounded" style="padding:15px" asp-controller="Resort" asp-action="EditBar" method="post">
         <partial name="_BarAddEditPartial" />
         <br />
+        <input type="hidden" asp-for="ActiveBar.BarId" />
         <button type="submit" class="btn btn-primary">Edit</button>
         <a asp-controller="Resort" asp-action="GetResortInfo" class="btn btn-primary">Cancel</a>
     </form>
