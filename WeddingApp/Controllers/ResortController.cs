@@ -24,16 +24,18 @@ namespace WeddingApp.Controllers
             List<Restaurants> restaurants = _weddingDbContext.Restaurants.Include(r => r.DressCode).ToList();
             List<Bars> bars = _weddingDbContext.Bars.ToList();
             List<DressCode> dressCode = _weddingDbContext.DressCode.ToList();
+            List<EventSpaces> eventSpaces = _weddingDbContext.EventSpaces.Include(e => e.EventType).ToList();
             ResortInfoViewModel resortInfoViewModel = new ResortInfoViewModel()
             {
                 Restaurants = restaurants,
                 Bars = bars,
-                DressCodes = dressCode
+                DressCodes = dressCode,
+                EventSpaces = eventSpaces
             };
 
             return View("Resort", resortInfoViewModel);
         }
-
+  
         [HttpGet("/NewRestaurant")]
         public IActionResult AddRestaurantRequest()
         {
@@ -143,7 +145,6 @@ namespace WeddingApp.Controllers
             barView.ActiveBar.HoursEnd = bar.HoursEnd.Substring(0,bar.HoursEnd.Length-2);
             return View("EditBar", barView);
         }
-
 
         [HttpPost()]
         public IActionResult EditBar(BarViewModel barViewModel)

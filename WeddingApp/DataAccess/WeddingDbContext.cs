@@ -43,7 +43,6 @@ namespace WeddingApp.DataAccess
 
         public DbSet<EventTypes> EventTypes { get; set; }
 
-        public DbSet<EventSpaceTypes> EventSpaceTypes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -92,17 +91,13 @@ namespace WeddingApp.DataAccess
                 .HasForeignKey(p => p.InvitedGuestId)
                 .OnDelete(DeleteBehavior.NoAction);
                 
-            modelBuilder.Entity<EventSpaceTypes>()
+            modelBuilder.Entity<EventSpaces>()
                 .HasOne(e => e.EventType)
-                .WithMany(t => t.EventSpaceTypes)
-                .HasForeignKey(e => e.TypeId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .WithMany(t => t.EventSpaces)
+                .HasForeignKey(e => e.EventTypeId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<EventSpaceTypes>()
-                .HasOne(e => e.EventSpace)
-                .WithMany(t => t.EventSpaceTypes)
-                .HasForeignKey(e => e.SpaceId)
-                .OnDelete(DeleteBehavior.NoAction);
+
 
             modelBuilder.Entity<Pictures>().HasData(
                 new Pictures() { PictureId = 1, Url = "Images\\IMG_0629.JPG"},

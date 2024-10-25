@@ -14,6 +14,6 @@ namespace WeddingAppDatabase.Entities
 
         public string TypeName { get; set; }
 
-        public ICollection<EventSpaceTypes>? EventSpaceTypes { get; set; }
+        public ICollection<EventSpaces>? EventSpaces  { get; set; }
     }
 }
