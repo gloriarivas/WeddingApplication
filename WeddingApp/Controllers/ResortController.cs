@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using WeddingApp.DataAccess;
 using WeddingApp.Models;
@@ -35,6 +36,7 @@ namespace WeddingApp.Controllers
 
             return View("Resort", resortInfoViewModel);
         }
+
   
         [HttpGet("/NewRestaurant")]
         public IActionResult AddRestaurantRequest()
@@ -162,6 +164,51 @@ namespace WeddingApp.Controllers
             return RedirectToAction("GetResortInfo", "Resort");
         }
 
+        [HttpGet("/AddEventSpace")]
+        public IActionResult AddEventRequest()
+        {
+            EventSpaceViewModel viewModel = new EventSpaceViewModel()
+            {
+                ActiveEventSpace = new EventSpaces(),
+                EventTypes = _weddingDbContext.EventTypes.ToList()
+            };
+            return View("AddEvent", viewModel);
+        }
+
+        [HttpPost()]
+        public IActionResult AddEventSpace(EventSpaceViewModel viewModel)
+        {
+            _weddingDbContext.EventSpaces.Add(viewModel.ActiveEventSpace);
+            _weddingDbContext.SaveChanges();
+  
+            return RedirectToAction("GetResortInfo", "Resort");
+        }
+
+        [HttpGet("/EditEventSpace/{id}")]
+        public IActionResult EditEventSpaceRequest(int id)
+        {
+            EventSpaceViewModel model = new EventSpaceViewModel()
+            {
+                ActiveEventSpace = GetEventSpaceById(id),
+                EventTypes = _weddingDbContext.EventTypes.ToList()
+            };
+            return View("EditEvent", model);
+        }
+
+        [HttpPost()]
+        public IActionResult EditEventSpace(EventSpaceViewModel viewModel)
+        {
+            _weddingDbContext.EventSpaces.Update(viewModel.ActiveEventSpace);
+            _weddingDbContext.SaveChanges();
+            return RedirectToAction("GetResortInfo", "Resort");
+        }
+
+        public IActionResult DeleteEvent(int id)
+        {
+            _weddingDbContext.EventSpaces.Where(b => b.EventSpaceId == id).ExecuteDelete();
+            return RedirectToAction("GetResortInfo", "Resort");
+        }
+
         [HttpGet("/AddDressCode")]
         public IActionResult AddDressCodeRequest()
         {
@@ -210,6 +257,10 @@ namespace WeddingApp.Controllers
         private Restaurants? GetRestaurantById(int id)
         {
             return _weddingDbContext.Restaurants.Where(r => r.RestaurantId == id).FirstOrDefault();
+        }
+        private EventSpaces? GetEventSpaceById(int id)
+        {
+            return _weddingDbContext.EventSpaces.Where(e => e.EventSpaceId == id).FirstOrDefault();
         }
 
         private RestaurantViewModel? AddRestaurantHours(RestaurantViewModel viewModel)

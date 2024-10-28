@@ -17,7 +17,7 @@
         <label asp-for="ActiveRestaurant.DressCodeId" class="form-label">Dress Code</label>
         <select asp-for="ActiveRestaurant.DressCodeId" class="form-control">
             <option value="">Select a Dress Code</option>
-            @foreach (WeddingAppDatabase.Entities.DressCode code in @Model.DressCodes)
+            @foreach (WeddingAppDatabase.Entities.DressCode code in Model.DressCodes)
             {
                 <option value="@code.DressCodeId">@code.Title</option>
             }

@@ -65,7 +65,13 @@
     }
 </div>
 <h2>Event Spaces</h2>
-<a asp-controller="Resort" asp-action="AddEventSpace">Add Event Space Info</a>
+<div>
+    <h4>Event Type:</h4>
+    <a>Ceremony</a>
+    <a>Cocktail Hour</a>
+    <a>Reception</a>
+</div>
+<a asp-controller="Resort" asp-action="AddEventRequest">Add Event Space Info</a>
 
 <div class="row">
     @foreach (var item in Model.EventSpaces)
@@ -75,16 +81,18 @@
                 <div class="card-body">
                     <h5>@item.EventSpaceName</h5>
                     <p>
-                       Description: @item.Description <br />
-                       Minimum Guests: @item.MinGuests <br />
-                       Maximum Guests: @item.MaxGuests <br />
-                       @if (item.BookingFee != 0 && item.BookingFee != null)
+                        Event Type: @item.EventType.TypeName <br />
+                        Description: @item.Description <br />
+                        Minimum Guests: @item.MinGuests <br />
+                        Maximum Guests: @item.MaxGuests <br />
+                        @if (item.BookingFee != 0 && item.BookingFee != null)
                         {
                             <i>Book Fee: $@item.BookingFee USD</i>
                         }
-                       <a asp-controller="Resort" asp-action="EditEventRequest" asp-route-eventId="@item.EventSpaceId">Edit</a>
-                       <span>|</span>
-                        <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-eventId="@item.EventSpaceId">Delete</a>
+                        <br />
+                        <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
+                        <span>|</span>
+                        <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
                     </p>
                 </div>
             </div>

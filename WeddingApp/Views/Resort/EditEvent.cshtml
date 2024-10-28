@@ -1,0 +1,14 @@
+﻿@model EventSpaceViewModel
+@{
+    ViewData["Title"] = "Edit Event Space";
+}
+<h1 style="text-align:center">Edit Event Space</h1>
+<div class="col-6" style="margin:auto">
+    <form class="border border-3 rounded" style="padding:15px" asp-controller="Resort" asp-action="EditEventSpace" method="post">
+        <input type="hidden" asp-for="ActiveEventSpace.EventSpaceId" />
+        <partial name="_EventAddEditPartial" />
+        <br />
+        <button type="submit" class="btn btn-primary">Edit</button>
+        <a asp-controller="Resort" asp-action="GetResortInfo" class="btn btn-primary">Cancel</a>
+    </form>
+</div>

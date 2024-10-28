@@ -1,0 +1,34 @@
+﻿@model EventSpaceViewModel
+
+<div class="form-group">
+    <div class="mb-3">
+        <label asp-for="ActiveEventSpace.EventSpaceName" class="form-label">Name:</label>
+        <input type="text" asp-for="ActiveEventSpace.EventSpaceName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ActiveEventSpace.Description" class="form-label">Description:</label>
+        <input type="text" asp-for="ActiveEventSpace.Description" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ActiveEventSpace.MinGuests" class="form-label">Minimum Number of Guests:</label>
+        <input type="number" asp-for="ActiveEventSpace.MinGuests" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ActiveEventSpace.MaxGuests" class="form-label">Maximum Number of Guests:</label>
+        <input type="number" asp-for="ActiveEventSpace.MaxGuests" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ActiveEventSpace.BookingFee" class="form-label">Booking Fee (if applicable):</label>
+        <input type="number" asp-for="ActiveEventSpace.BookingFee" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ActiveEventSpace.EventTypeId" class="form-label">Event Type:</label>
+        <select asp-for="ActiveEventSpace.EventTypeId" class="form-control">
+            <option value="">Select an Event Type</option>
+            @foreach (WeddingAppDatabase.Entities.EventTypes type in Model.EventTypes)
+            {
+                <option value="@type.EventTypeId">@type.TypeName</option>
+            }
+        </select>
+    </div>
+</div>
