@@ -8,8 +8,8 @@
     <a asp-controller="Resort" asp-action="AddRestaurantRequest">Add Restaurant Info</a>
 @foreach (var item in Model.Restaurants)
 {
-    <div class="col-sm-4 mb-3 mb-sm-0">
-        <div class="card">
+        <div class="col-sm-4 mb-3 mb-sm-0" style="padding-bottom:2%">
+        <div class="card h-100">
             <div class="card-body">
                 <h4>@item.RestaurantName</h4>
                 <p>
@@ -31,7 +31,7 @@
                     }
                     <a asp-controller="Resort" asp-action="EditRestaurantRequest" asp-route-id="@item.RestaurantId">Edit</a>
                     <span>|</span>
-                        <a asp-controller="Resort" asp-action="DeleteRestaurant" asp-route-restaurantId="@item.RestaurantId">Delete</a>
+                    <a asp-controller="Resort" asp-action="DeleteRestaurant" asp-route-restaurantId="@item.RestaurantId">Delete</a>
             </div>
         </div>
         <br />
@@ -44,8 +44,8 @@
 <div class="row">
     @foreach (var item in Model.Bars)
     {
-        <div class="col-sm-4 mb-3 mb-sm-0">
-            <div class="card">
+        <div class="col-sm-4 mb-3 mb-sm-0" style="padding-bottom:2%">
+            <div class="card h-100">
                 <div class="card-body">
                     <h5>@item.BarName</h5>
                     <p>
@@ -66,11 +66,12 @@
 </div>
 <h2>Event Spaces</h2>
 <a asp-controller="Resort" asp-action="AddEventSpace">Add Event Space Info</a>
+
 <div class="row">
     @foreach (var item in Model.EventSpaces)
     {
-        <div class="col-sm-4 mb-3 mb-sm-0">
-            <div class="card">
+        <div class="col-sm-4 mb-3 mb-sm-0" style="padding-bottom:2%">
+            <div class="card h-100">
                 <div class="card-body">
                     <h5>@item.EventSpaceName</h5>
                     <p>

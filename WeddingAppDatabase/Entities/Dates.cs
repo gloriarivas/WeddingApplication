@@ -12,14 +12,14 @@ namespace WeddingAppDatabase.Entities
         [Key]
         public int DateId { get; set; }
 
-        public string DateName { get; set; }
+        public string? DateName { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         //date and time the event starts
-        public DateTime DateStart { get; set; }
+        public DateTime? DateStart { get; set; }
 
         //date and time the event ends
-        public DateTime DateEnd { get; set; }
+        public DateTime? DateEnd { get; set; }
     }
 }
