@@ -2,50 +2,50 @@
 @{
     ViewData["Title"] = "Guest List";
 }
-
-<form asp-controller="GuestList" asp-action="AddNewGuestRequest" method="get" enctype="application/x-www-form-urlencoded">
-	<button type="submit" class="btn btn-primary">Add new guest</button>
-</form>
-
-<br />
-
-<table class="table table-bordered table-striped">
-	<thead>
-		<tr>
-			<th></th>
-			<th><a asp-controller="GuestList" asp-action="GetGuestList" asp-route-orderBy="1">First Name</a></th>
-			<th><a asp-controller="GuestList" asp-action="GetGuestList" asp-route-orderBy="2">Last Name</a></th>
-			<th><a asp-controller="GuestList" asp-action="GetGuestList" asp-route-orderBy="3">Role</a></th>
-			<th>Phone Number</th>
-			<th>Email</th>
-			<th>Address</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@{
-			int counter = 1;
-		}
-		@foreach (var guest in Model.Guests)
-		{
-			<tr>
-				<td>@counter</td>
-				<td>@guest.FirstName</td>
-				<td>@guest.LastName</td>
-				<td>@guest.WeddingParty?.Role</td>
-				<td>@guest.PhoneNumber</td>
-				<td>@guest.Email</td>
-				<td>@guest.Address</td>
-				<td>
-					<form style="text-align: center" asp-controller="GuestList" asp-action="DeleteGuestRequest" method="post" asp-route-guestId="@guest.GuestId">
-					<input type="hidden" asp-for="@guest.GuestId" />
-					<a asp-controller="GuestList" asp-action="EditGuestRequest" asp-route-guestId="@guest.GuestId">Edit</a>
-					<span class="mx-1">|</span>
-					<button type="submit" class="btn btn-link">Delete</button>
-				</form>
-				</td>
-			</tr>
-			counter++;
-		}
-	</tbody>
-</table>
+<div class="mainBody">
+    <h3>Guest List</h3>
+    <form asp-controller="GuestList" asp-action="AddNewGuestRequest" method="get" enctype="application/x-www-form-urlencoded">
+        <button type="submit" class="btn btn-primary">Add new guest</button>
+    </form>
+    <br />
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th><a asp-controller="GuestList" asp-action="GetGuestList" asp-route-orderBy="1">First Name</a></th>
+                <th><a asp-controller="GuestList" asp-action="GetGuestList" asp-route-orderBy="2">Last Name</a></th>
+                <th><a asp-controller="GuestList" asp-action="GetGuestList" asp-route-orderBy="3">Role</a></th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int counter = 1;
+            }
+            @foreach (var guest in Model.Guests)
+            {
+                <tr>
+                    <td>@counter</td>
+                    <td>@guest.FirstName</td>
+                    <td>@guest.LastName</td>
+                    <td>@guest.WeddingParty?.Role</td>
+                    <td>@guest.PhoneNumber</td>
+                    <td>@guest.Email</td>
+                    <td>@guest.Address</td>
+                    <td>
+                        <form style="text-align: center" asp-controller="GuestList" asp-action="DeleteGuestRequest" method="post" asp-route-guestId="@guest.GuestId">
+                            <input type="hidden" asp-for="@guest.GuestId" />
+                            <a asp-controller="GuestList" asp-action="EditGuestRequest" asp-route-guestId="@guest.GuestId">Edit</a>
+                            <span class="mx-1">|</span>
+                            <button type="submit" class="btn btn-link">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                counter++;
+            }
+        </tbody>
+    </table>
+</div>

@@ -2,10 +2,12 @@
 @{
     ViewData["Title"] = "Add New Guest";
 }
-<form asp-controller="GuestList" asp-action="AddNewGuest" method="post" enctype="application/x-www-form-urlencoded">
-    <partial name="_GuestAddEditPartial" />
-    <br />
-    <div class="form-group row">
-        <button type="submit" class="btn btn-primary">Add</button>
-    </div>
-</form>
+<div class="mainBody">
+    <form asp-controller="GuestList" asp-action="AddNewGuest" method="post" enctype="application/x-www-form-urlencoded">
+        <partial name="_GuestAddEditPartial" />
+        <br />
+        <div class="form-group row">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+</div>

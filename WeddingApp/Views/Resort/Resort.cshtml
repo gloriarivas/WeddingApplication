@@ -3,8 +3,8 @@
     ViewData["Title"] = "Resort Info";
 }
 
-<div class="row" style="display:flex">
-    <div class="col-2 sidebar ">
+<div class="row mainBody" style="display:flex">
+    <div class="col-2 sidebar">
         <nav id="navBar-resortInfo" class="h-100 flex-column pe-4">
             <a class="navbar-brand" href="#">Resort Info</a>
             <nav class="nav nav-pills flex-column">
@@ -23,8 +23,9 @@
     </div>
 
     <div class="col-10" style="margin-left:20%">
-        <div data-bs-spy="scroll" data-bs-target="#navbar-resortInfo" data-bs-smooth-scroll="true" tabindex="0">
-            <div id="restaurantNav">
+        <div data-bs-spy="scroll" data-bs-target="#navbar-resortInfo" data-bs-smooth-scroll="true" tabindex="0" >
+            <h1 style="text-align:center">Resort Info</h1>
+            <div id="restaurantNav" class="mainBody">
                 <h2>Restaurants</h2>
                 <div class="row">
                     <a asp-controller="Resort" asp-action="AddRestaurantRequest">Add Restaurant Info</a>
@@ -67,7 +68,7 @@
                     }
                 </div>
             </div>
-            <div id="barNav">
+            <div id="barNav" class="mainBody">
                 <h2>Bars</h2>
                 <a asp-controller="Resort" asp-action="AddBarRequest">Add Bar Info</a>
                 <div class="row">
@@ -95,7 +96,7 @@
                     }
                 </div>
             </div>
-            <div id="eventNav">
+            <div id="eventNav" class="mainBody">
                 <h2>Event Spaces</h2>
                 <div class="row">
                     <p class="d-inline-flex gap-1">
@@ -202,7 +203,7 @@
                     </div>
                 </div>
             </div>
-            <div id="dressCodeNav">
+            <div id="dressCodeNav" class="mainBody">
                 <h2>Dress Codes</h2>
                 <a asp-controller="Resort" asp-action="AddDressCodeRequest">Add Dress Code Info</a>
                 <table class="table table-bordered">
@@ -243,5 +244,4 @@
             </div>
 
         </div>
-
-</div>
+    </div>
