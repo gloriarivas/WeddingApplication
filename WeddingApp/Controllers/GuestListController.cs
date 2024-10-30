@@ -83,17 +83,14 @@ namespace WeddingApp.Controllers
             List<Guests> guests = new List<Guests>();
             switch (orderBy)
             {
-                case 0: //inital
-                    guests = _weddingDbContext.Guests.Include(w => w.WeddingParty).ToList();
+                case 0: //inital and rder by role
+                    guests = _weddingDbContext.Guests.Include(w => w.WeddingParty).OrderBy(w => w.WeddingPartyId).ToList();
                     break;
                 case 1: //order by first name
                     guests = _weddingDbContext.Guests.Include(w => w.WeddingParty).OrderBy(w => w.FirstName).ToList();
                     break;
                 case 2: //order by last name
                     guests = _weddingDbContext.Guests.Include(w => w.WeddingParty).OrderBy(w => w.LastName).ToList();
-                    break;
-                case 3: //order by role
-                    guests = _weddingDbContext.Guests.Include(w => w.WeddingParty).OrderBy(w => w.WeddingPartyId).ToList();
                     break;
             }
             //turn the list into the view model then pass to the cshtml page

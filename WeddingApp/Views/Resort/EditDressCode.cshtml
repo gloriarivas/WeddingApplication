@@ -4,7 +4,7 @@
 }
 <div class="col-6 mainBody" style="margin:auto">
     <h3>Edit Dress Code</h3>
-    <form asp-controller="Resort" asp-action="EditDressCode" method="post" enctype="application/x-www-form-urlencoded" asp-route-dressCodeId="@Model.ActiveDressCode.DressCodeId">
+    <form asp-controller="Resort" asp-action="EditDressCode" method="post" enctype="application/x-www-form-urlencoded" asp-route-dressCodeId="@Model.ActiveDressCode.DressCodeId" class="border border-3 rounded" style="padding:20px;">
         <partial name="_DressCodeAddEditPartial" />
         <br />
         <button type="submit" class="btn btn-primary">Edit</button>

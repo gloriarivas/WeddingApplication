@@ -12,6 +12,7 @@
                     <th>Description</th>
                     <th>Start Date</th>
                     <th>End Date</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,8 +34,8 @@
         <p>TODO: create a calendar view</p>
 
     </div>
-    <div class="col-3">
-        <h2>New Event</h2>
+    <div class="col-3 border border-3 rounded" style="padding:20px;">
+        <h3>New Event</h3>
         <form asp-controller="ImportantDates" asp-action="AddNewDate" method="post">
             <partial name="_AddNewDatePartial" />
             <button type="submit" class="btn btn-primary">Add Event</button>

@@ -1,19 +1,19 @@
 ﻿@model DateViewModel
-    <div class="form-group">
+<div class="form-group">
         <div class="form-group row">
-            <label asp-for="ActiveDate.DateName">Event Name</label>
-            <input type="text" asp-for="ActiveDate.DateName" />
+            <label asp-for="ActiveDate.DateName" class="form-label">Event Name</label>
+        <input type="text" asp-for="ActiveDate.DateName" class="form-control" />
         </div>
         <div class="form-group row">
-            <label asp-for="ActiveDate.Description">Description</label>
-            <input type="text" asp-for="ActiveDate.Description" />
+            <label asp-for="ActiveDate.Description" class="form-label">Description</label>
+        <input type="text" asp-for="ActiveDate.Description" class="form-control" />
         </div>
         <div class="form-group row">
-            <label asp-for="ActiveDate.DateStart">Event Start</label>
-            <input class="form-control" asp-for="ActiveDate.DateStart" />
+        <label asp-for="ActiveDate.DateStart" class="form-label">Event Start</label>
+        <input class="form-control" asp-for="ActiveDate.DateStart" class="form-control" />
         </div>
         <div class="form-group row">
-            <label asp-for="ActiveDate.DateEnd">Event End</label>
-            <input class="form-control" asp-for="ActiveDate.DateEnd" />
+        <label asp-for="ActiveDate.DateEnd" class="form-label">Event End</label>
+        <input class="form-control" asp-for="ActiveDate.DateEnd" class="form-control" />
         </div><br />
     </div>

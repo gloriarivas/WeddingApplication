@@ -1,7 +1,8 @@
 ﻿@model DateViewModel
-<div class="mainBody">
+<div class="mainBody col-6" style="margin:auto">
+    
     <h3>Edit @Model.ActiveDate.DateName</h3>
-    <form asp-controller="ImportantDates" asp-action="EditDate" method="post" asp-route-dateId="@Model.ActiveDate.DateId">
+    <form asp-controller="ImportantDates" asp-action="EditDate" method="post" asp-route-dateId="@Model.ActiveDate.DateId" class="border border-3 rounded" style="padding:20px">
         <partial name="_AddNewDatePartial" />
         <button type="submit" class="btn btn-primary">Edit Event</button>
         <a class="btn btn-primary" asp-area="" asp-controller="ImportantDates" asp-action="GetDates">Cancel</a>
