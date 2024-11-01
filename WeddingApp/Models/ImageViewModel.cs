@@ -4,6 +4,6 @@ namespace WeddingApp.Models
 {
     public class ImageViewModel
     {
-        public List<Pictures> Pictures { get; set; }
+        public List<GalleryImages> Pictures { get; set; }
     }
 }

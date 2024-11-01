@@ -7,25 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Images\IMG_0629.JPG" />
-    <None Include="wwwroot\Images\IMG_0630.JPG" />
-    <None Include="wwwroot\Images\IMG_1540.JPG" />
-    <None Include="wwwroot\Images\IMG_2702.JPG" />
-    <None Include="wwwroot\Images\IMG_2708.JPG" />
-    <None Include="wwwroot\Images\IMG_2714.JPG" />
-    <None Include="wwwroot\Images\IMG_3218.JPG" />
-    <None Include="wwwroot\Images\IMG_3271.JPG" />
-    <None Include="wwwroot\Images\IMG_3285.JPG" />
-    <None Include="wwwroot\Images\IMG_3291.JPG" />
-    <None Include="wwwroot\Images\IMG_3309.JPG" />
-    <None Include="wwwroot\Images\IMG_4107.JPG" />
-    <None Include="wwwroot\Images\IMG_4370.JPG" />
-    <None Include="wwwroot\Images\IMG_4390.JPG" />
-    <None Include="wwwroot\Images\OXLZ6554.JPG" />
-    <None Include="wwwroot\Images\SIAM0204.JPG" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">

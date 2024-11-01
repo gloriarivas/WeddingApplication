@@ -21,7 +21,7 @@ namespace WeddingApp.Controllers
         [HttpGet("/Gallery")]
         public IActionResult GetImages() {
             //TODO: fix this
-            List<Pictures> pics = _weddingDbContext.Pictures.ToList();
+            List<GalleryImages> pics = _weddingDbContext.GalleryImages.ToList();
             
             ImageViewModel imageViewModel = new ImageViewModel()
             {
