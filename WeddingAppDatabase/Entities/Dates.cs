@@ -21,5 +21,7 @@ namespace WeddingAppDatabase.Entities
 
         //date and time the event ends
         public DateTime? DateEnd { get; set; }
+
+        public string? Importance { get; set; }
     }
 }

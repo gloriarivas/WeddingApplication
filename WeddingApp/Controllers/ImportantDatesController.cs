@@ -19,10 +19,26 @@ namespace WeddingApp.Controllers
             return View();
         }
 
-        [HttpGet()]
-        public IActionResult GetDates()
+        [HttpGet("/Dates")]
+        public IActionResult GetDates(int orderBy)
         {
-            List<Dates> dates = _weddingDbContext.Dates.OrderBy(d => d.DateStart).ToList();
+            List<Dates> dates = new List<Dates>();
+            switch (orderBy)
+            {
+                case 0:
+                    dates = _weddingDbContext.Dates.OrderBy(d => d.DateStart).ToList();
+                    break;
+                case 1:
+                    dates = _weddingDbContext.Dates.OrderBy(d => d.DateName).ToList();
+                    break;
+                case 2:
+                    dates = _weddingDbContext.Dates.OrderBy(d => d.DateEnd).ToList();
+                    break;
+                case 3:
+                    dates = _weddingDbContext.Dates.OrderBy(d => d.Importance).ToList();
+                    break;
+            }
+
             DateViewModel dateViewModel = new DateViewModel()
             {
                 Dates = dates
@@ -51,9 +67,8 @@ namespace WeddingApp.Controllers
         }
 
         [HttpPost()]
-        public IActionResult EditDate(DateViewModel dateViewModel, int DateId)
+        public IActionResult EditDate(DateViewModel dateViewModel)
         {
-            dateViewModel.ActiveDate.DateId = DateId;
             _weddingDbContext.Dates.Update(dateViewModel.ActiveDate);
             _weddingDbContext.SaveChanges();
             return RedirectToAction("GetDates", "ImportantDates");

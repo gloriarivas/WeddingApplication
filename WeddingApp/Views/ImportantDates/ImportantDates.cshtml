@@ -3,15 +3,16 @@
     ViewData["Title"] = "Important Dates";
 }
 <div class="row mainBody">
-    <div class="col-9">
+    <div class="col-8">
     <h3>Important Dates</h3>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Event Name</th>
+                    <th><a asp-controller="ImportantDates" asp-action="GetDates" asp-route-orderBy="1">Event Name</a></th>
                     <th>Description</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
+                    <th><a asp-controller="ImportantDates" asp-action="GetDates" asp-route-orderBy="0">Start Date</a></th>
+                    <th><a asp-controller="ImportantDates" asp-action="GetDates" asp-route-orderBy="2">End Date</a></th>
+                    <th><a asp-controller="ImportantDates" asp-action="GetDates" asp-route-orderBy="3">Priority</a></th>
                     <th></th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                         <td>@eventTime.Description</td>
                         <td>@eventTime.DateStart</td>
                         <td>@eventTime.DateEnd</td>
+                        <td>@eventTime.Importance</td>
                         <td>
                             <input type="hidden" asp-for="@eventTime.DateId" />
                             <a asp-controller="ImportantDates" asp-action="EditDateRequest" asp-route-dateId="@eventTime.DateId">Edit</a>
@@ -31,10 +33,9 @@
                 }
             </tbody>
         </table>
-        <p>TODO: create a calendar view</p>
 
     </div>
-    <div class="col-3 border border-3 rounded" style="padding:20px;">
+    <div class="col-4 border border-3 rounded" style="padding:20px;">
         <h3>New Event</h3>
         <form asp-controller="ImportantDates" asp-action="AddNewDate" method="post">
             <partial name="_AddNewDatePartial" />

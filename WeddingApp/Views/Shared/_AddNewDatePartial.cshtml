@@ -1,19 +1,29 @@
 ﻿@model DateViewModel
 <div class="form-group">
-        <div class="form-group row">
-            <label asp-for="ActiveDate.DateName" class="form-label">Event Name</label>
-        <input type="text" asp-for="ActiveDate.DateName" class="form-control" />
-        </div>
-        <div class="form-group row">
-            <label asp-for="ActiveDate.Description" class="form-label">Description</label>
-        <input type="text" asp-for="ActiveDate.Description" class="form-control" />
-        </div>
-        <div class="form-group row">
-        <label asp-for="ActiveDate.DateStart" class="form-label">Event Start</label>
-        <input class="form-control" asp-for="ActiveDate.DateStart" class="form-control" />
-        </div>
-        <div class="form-group row">
-        <label asp-for="ActiveDate.DateEnd" class="form-label">Event End</label>
-        <input class="form-control" asp-for="ActiveDate.DateEnd" class="form-control" />
-        </div><br />
+    <div class="form-group row" style="margin-bottom:5px">
+        <label asp-for="ActiveDate.DateName" class="form-label">Event Name</label>
+    <input type="text" asp-for="ActiveDate.DateName" class="form-control" />
     </div>
+    <div class="form-group row" style="margin-bottom:5px">
+        <label asp-for="ActiveDate.Description" class="form-label">Description</label>
+    <input type="text" asp-for="ActiveDate.Description" class="form-control" />
+    </div>
+    <div class="form-group row" style="margin-bottom:5px">
+        <label asp-for="ActiveDate.Importance" class="form-label">Priority</label>
+        <select asp-for="ActiveDate.Importance" class="form-control">
+            <option value="">Select Priority</option>
+            <option value="Low">Low</option>
+            <option value="Moderate">Moderate</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+        </select>
+    </div>
+    <div class="form-group row" style="margin-bottom:5px">
+    <label asp-for="ActiveDate.DateStart" class="form-label">Event Start</label>
+    <input class="form-control" asp-for="ActiveDate.DateStart" class="form-control" />
+    </div>
+    <div class="form-group row" style="margin-bottom:15px">
+    <label asp-for="ActiveDate.DateEnd" class="form-label">Event End</label>
+    <input class="form-control" asp-for="ActiveDate.DateEnd" class="form-control" />
+    </div>
+</div>
