@@ -209,6 +209,22 @@ namespace WeddingApp.Controllers
             return RedirectToAction("GetResortInfo", "Resort");
         }
 
+        public IActionResult AddToFavourites(int id)
+        {
+            EventSpaces space = GetEventSpaceById(id);
+            if (space.Favourite == true)
+            {
+                space.Favourite = false;
+            }
+            else
+            {
+                space.Favourite = true;
+            }
+            _weddingDbContext.Update(space);
+            _weddingDbContext.SaveChanges();
+            return RedirectToAction("GetResortInfo", "Resort");
+        }
+
         [HttpGet("/AddDressCode")]
         public IActionResult AddDressCodeRequest()
         {

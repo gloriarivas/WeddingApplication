@@ -36,12 +36,9 @@
                     <td>@guest.Email</td>
                     <td>@guest.Address</td>
                     <td>
-                        <form style="text-align: center" asp-controller="GuestList" asp-action="DeleteGuestRequest" method="post" asp-route-guestId="@guest.GuestId">
-                            <input type="hidden" asp-for="@guest.GuestId" />
-                            <a asp-controller="GuestList" asp-action="EditGuestRequest" asp-route-guestId="@guest.GuestId">Edit</a>
-                            <span class="mx-1">|</span>
-                            <button type="submit" class="btn btn-link">Delete</button>
-                        </form>
+                        <a asp-controller="GuestList" asp-action="EditGuestRequest" asp-route-guestId="@guest.GuestId">Edit</a>
+                        <span class="mx-1">|</span>
+                        <a asp-controller="GuestList" asp-action="DeleteGuestRequest" asp-route-guestId="@guest.GuestId">Delete</a>
                     </td>
                 </tr>
                 counter++;

@@ -5,28 +5,20 @@
 
 <div class="row mainBody" style="display:flex">
     <div class="col-2 sidebar">
-        <nav id="navBar-resortInfo" class="h-100 flex-column pe-4">
+        <nav id="#navBar-resortInfo" class="h-100 flex-column pe-4">
             <a class="navbar-brand" href="#">Resort Info</a>
-            <nav class="nav nav-pills flex-column">
                 <a class="nav-link" href="#restaurantNav">Restaurants</a>
-            </nav>
-            <nav class="nav nav-pills flex-column">
                 <a class="nav-link" href="#barNav">Bars</a>
-            </nav>
-            <nav class="nav nav-pills flex-column">
                 <a class="nav-link" href="#eventNav">Event Spaces</a>
-            </nav>
-            <nav class="nav nav-pills flex-column">
                 <a class="nav-link" href="#dressCodeNav">Dress Code</a>
-            </nav>
         </nav>
     </div>
 
     <div class="col-10" style="margin-left:20%">
-        <div data-bs-spy="scroll" data-bs-target="#navbar-resortInfo" data-bs-smooth-scroll="true" tabindex="0" >
+        <div data-bs-spy="scroll" data-bs-target="#navbar-resortInfo" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0" style="position: relative;">
             <h1 style="text-align:center">Resort Info</h1>
-            <div id="restaurantNav" class="mainBody">
-                <h2>Restaurants</h2>
+
+                <h2 id="restaurantNav" class="mainBody">Restaurants</h2>
                 <div class="row">
                     <a asp-controller="Resort" asp-action="AddRestaurantRequest">Add Restaurant Info</a>
                     @foreach (var item in Model.Restaurants)
@@ -67,9 +59,9 @@
                         </div>
                     }
                 </div>
-            </div>
-            <div id="barNav" class="mainBody">
-                <h2>Bars</h2>
+
+
+                <h2 id="barNav" class="mainBody">Bars</h2>
                 <a asp-controller="Resort" asp-action="AddBarRequest">Add Bar Info</a>
                 <div class="row">
                     @foreach (var item in Model.Bars)
@@ -95,162 +87,189 @@
                         </div>
                     }
                 </div>
-            </div>
-            <div id="eventNav" class="mainBody">
-                <h2>Event Spaces</h2>
-                <div class="row">
-                    <p class="d-inline-flex gap-1">
-                        <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#Ceremony" role="button" aria-expanded="false">Ceremony</a>
-                        <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#Cocktail" role="button" aria-expanded="false">Cocktail Hour</a>
-                        <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#Reception" role="button" aria-expanded="false">Reception</a>             
-                    </p>
-                    <a asp-controller="Resort" asp-action="AddEventRequest">Add Event Space Info</a>
-                    <div class="collapse" id="Ceremony">
-                        <h4>Ceremony</h4>
-                        <div class="row">
-                            @foreach (var item in Model.EventSpaces)
-                            {
-                                if (item.EventTypeId == 100)
-                                {
-                                    <div class="col-sm-4" style="padding-bottom:2%">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h5>@item.EventSpaceName</h5>
-                                                <p>
-                                                    Event Type: @item.EventType.TypeName <br />
-                                                    Description: @item.Description <br />
-                                                    Minimum Guests: @item.MinGuests <br />
-                                                    Maximum Guests: @item.MaxGuests <br />
-                                                    @if (item.BookingFee != 0 && item.BookingFee != null)
-                                                    {
-                                                        <i>Booking Fee: $@item.BookingFee USD</i>
-                                                    }
-                                                    <br />
-                                                    <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
-                                                    <span>|</span>
-                                                    <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <br />
-                                    </div>
+           
 
-                                }
-                            }
-                        </div>
-                       
-                    </div>
-                    <div class="collapse" id="Cocktail">
-                        <h4>Cocktail Hour</h4>
-                        <div class="row">
-                            @foreach (var item in Model.EventSpaces)
-                            {
-                                if (item.EventTypeId == 101)
-                                {
-                                    <div class="col-sm-4" style="padding-bottom:2%">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h5>@item.EventSpaceName</h5>
-                                                <p>
-                                                    Event Type: @item.EventType.TypeName <br />
-                                                    Description: @item.Description <br />
-                                                    Minimum Guests: @item.MinGuests <br />
-                                                    Maximum Guests: @item.MaxGuests <br />
-                                                    @if (item.BookingFee != 0 && item.BookingFee != null)
-                                                    {
-                                                        <i>Booking Fee: $@item.BookingFee USD</i>
-                                                    }
-                                                    <br />
-                                                    <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
-                                                    <span>|</span>
-                                                    <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <br />
-                                    </div>
-
-                                }
-                            }
-                        </div>
-                       
-                    </div>
-                    <div class="collapse" id="Reception">
-                        <h4>Reception</h4>
-                        <div class="row">
-                            @foreach (var item in Model.EventSpaces)
-                            {
-                                if (item.EventTypeId == 102)
-                                {
-                                    <div class="col-sm-4" style="padding-bottom:2%">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h5>@item.EventSpaceName</h5>
-                                                <p>
-                                                    Event Type: @item.EventType.TypeName <br />
-                                                    Description: @item.Description <br />
-                                                    Minimum Guests: @item.MinGuests <br />
-                                                    Maximum Guests: @item.MaxGuests <br />
-                                                    @if (item.BookingFee != 0 && item.BookingFee != null)
-                                                    {
-                                                        <i>Booking Fee: $@item.BookingFee USD</i>
-                                                    }
-                                                    <br />
-                                                    <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
-                                                    <span>|</span>
-                                                    <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <br />
-                                    </div>
-
-                                }
-                            }
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
-            <div id="dressCodeNav" class="mainBody">
-                <h2>Dress Codes</h2>
-                <a asp-controller="Resort" asp-action="AddDressCodeRequest">Add Dress Code Info</a>
-                <table class="table table-bordered">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Title</th>
-                            <th>Women</th>
-                            <th>Men</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var code in Model.DressCodes)
+            <h2 id="eventNav" class="mainBody">Event Spaces</h2>
+            <div class="row">
+                <p class="d-inline-flex gap-1">
+                    <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#Ceremony" role="button" aria-expanded="false">Ceremony</a>
+                    <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#Cocktail" role="button" aria-expanded="false">Cocktail Hour</a>
+                    <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#Reception" role="button" aria-expanded="false">Reception</a>             
+                </p>
+                <a asp-controller="Resort" asp-action="AddEventRequest">Add Event Space Info</a>
+                <div class="collapse" id="Ceremony">
+                    <h4>Ceremony</h4>
+                    <div class="row">
+                        @foreach (var item in Model.EventSpaces)
                         {
-                            if (code.Title == "None")
+                            if (item.EventTypeId == 100)
                             {
-                                <tr>
-                                    <td class="fw-bold">@code.Title</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            }
-                            else
-                            {
-                                <tr>
-                                    <td class="fw-bold">@code.Title</td>
-                                    <td>@code.DescriptionWomen <br />No: @code.BannedItemsWomen</td>
-                                    <td>@code.DescriptionMen <br />No: @code.BannedItemsMen</td>
-                                    <td><a asp-controller="Resort" asp-action="EditDressCodeRequest" asp-route-dressCodeId="@code.DressCodeId">Edit</a></td>
-                                </tr>
+                                <div class="col-sm-4" style="padding-bottom:2%">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5>@item.EventSpaceName</h5>
+                                            <p>
+                                                Event Type: @item.EventType.TypeName <br />
+                                                Description: @item.Description <br />
+                                                Minimum Guests: @item.MinGuests <br />
+                                                Maximum Guests: @item.MaxGuests <br />
+                                                @if (item.BookingFee != 0 && item.BookingFee != null)
+                                                {
+                                                    <i>Booking Fee: $@item.BookingFee USD</i>
+                                                }
+                                                <br />
+                                                @if (@item.Favourite == false)
+                                                {
+                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star.svg" /></a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star-fill.svg" /></a>
+                                                }
+                                                <span>|</span>
+                                                <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
+                                                <span>|</span>
+                                                <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>
+
                             }
                         }
-                    </tbody>
-                </table>
-                <a href="https://www.valentinmaya.com/en/gastronomy/">Valentin Website</a>
-            </div>
+                    </div>
+                       
+                </div>
+                <div class="collapse" id="Cocktail">
+                    <h4>Cocktail Hour</h4>
+                    <div class="row">
+                        @foreach (var item in Model.EventSpaces)
+                        {
+                            if (item.EventTypeId == 101)
+                            {
+                                <div class="col-sm-4" style="padding-bottom:2%">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5>@item.EventSpaceName</h5>
+                                            <p>
+                                                Event Type: @item.EventType.TypeName <br />
+                                                Description: @item.Description <br />
+                                                Minimum Guests: @item.MinGuests <br />
+                                                Maximum Guests: @item.MaxGuests <br />
+                                                @if (item.BookingFee != 0 && item.BookingFee != null)
+                                                {
+                                                    <i>Booking Fee: $@item.BookingFee USD</i>
+                                                }
+                                                <br />
+                                                @if (@item.Favourite == false)
+                                                {
+                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star.svg" /></a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star-fill.svg" /></a>
+                                                }
+                                                <span>|</span>
+                                                <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
+                                                <span>|</span>
+                                                <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>
+
+                            }
+                        }
+                    </div>
+                       
+                </div>
+                <div class="collapse" id="Reception">
+                    <h4>Reception</h4>
+                    <div class="row">
+                        @foreach (var item in Model.EventSpaces)
+                        {
+                            if (item.EventTypeId == 102)
+                            {
+                                <div class="col-sm-4" style="padding-bottom:2%">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5>@item.EventSpaceName</h5>
+                                            <p>
+                                                Event Type: @item.EventType.TypeName <br />
+                                                Description: @item.Description <br />
+                                                Minimum Guests: @item.MinGuests <br />
+                                                Maximum Guests: @item.MaxGuests <br />
+                                                @if (item.BookingFee != 0 && item.BookingFee != null)
+                                                {
+                                                    <i>Booking Fee: $@item.BookingFee USD</i>
+                                                }
+                                                <br />
+                                                @if (@item.Favourite == false)
+                                                {
+                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star.svg" /></a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star-fill.svg" /></a>
+                                                }
+                                                <span>|</span>
+                                                <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
+                                                <span>|</span>
+                                                <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>
+
+                            }
+                        }
+                    </div>
+                       
+                </div>
             </div>
 
+            
+            <h2 id="dressCodeNav" class="mainBody">Dress Codes</h2>
+            <a asp-controller="Resort" asp-action="AddDressCodeRequest">Add Dress Code Info</a>
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Women</th>
+                        <th>Men</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var code in Model.DressCodes)
+                    {
+                        if (code.Title == "None")
+                        {
+                            <tr>
+                                <td class="fw-bold">@code.Title</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td class="fw-bold">@code.Title</td>
+                                <td>@code.DescriptionWomen <br />No: @code.BannedItemsWomen</td>
+                                <td>@code.DescriptionMen <br />No: @code.BannedItemsMen</td>
+                                <td><a asp-controller="Resort" asp-action="EditDressCodeRequest" asp-route-dressCodeId="@code.DressCodeId">Edit</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <a href="https://www.valentinmaya.com/en/gastronomy/">Valentin Website</a>
+            
         </div>
+
     </div>
+</div>

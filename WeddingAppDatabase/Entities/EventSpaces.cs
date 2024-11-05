@@ -22,6 +22,8 @@ namespace WeddingAppDatabase.Entities
 
         public Double? BookingFee { get; set; }
 
+        public bool? Favourite { get; set; } = false;
+
         public int? EventTypeId { get; set; }
         public EventTypes? EventType { get; set; }
     }
