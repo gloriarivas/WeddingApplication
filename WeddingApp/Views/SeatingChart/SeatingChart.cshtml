@@ -5,4 +5,53 @@
 <div class="mainBody">
 
 <h1>TODO: Seating Chart</h1>
+
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col-sm-2">
+                This coloumn display guests and controls
+                One of three columns
+                <button>left</button>
+                <button>right</button>
+                <button>up</button>
+                <button>down</button>
+    
+
+            </div>
+            <div class="col-sm-8">
+                This column display seating chart
+                One of three columns
+                @* If 0 tables just display a 5 X 5 grid *@
+                @for (int i = 0; i < 5; i++)
+                {
+                    var id = "row" + i.ToString();
+                    <div class="row">
+                        <div class="col" id="@id.ToString()+"cell0"">
+                            @id.ToString()+"cell0"
+                        </div>
+                        <div class="col" id="@id.ToString()+" cell1"">
+                            @id.ToString() +"cell1"
+                        </div>
+                        <div class="col" id="@id.ToString()+" cell2"">
+                            @id.ToString()+"cell2"
+                        </div>
+                        <div class="col" id="@id.ToString()+" cell3"">
+                            @id.ToString()+"cell3"
+                        </div>
+                        <div class="col" id="@id.ToString()+" cell4"">
+                            @id.ToString()+"cell4"
+                        </div>
+                    </div>
+                }
+                <form asp-controller="SeatingChart" asp-action="AddNewTableRequest" method="get" enctype="application/x-www-form-urlencoded">
+                    <button type="submit" class="btn btn-primary">Add table</button>
+                </form>
+             
+            </div>
+            <div class="col-sm-2">
+                This column display guests assigned to table
+                One of three columns
+            </div>
+        </div>
+    </div>
 </div>
