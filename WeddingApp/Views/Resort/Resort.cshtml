@@ -87,151 +87,36 @@
                         </div>
                     }
                 </div>
-           
+
 
             <h2 id="eventNav" class="mainBody">Event Spaces</h2>
-            <div class="row">
-                <p class="d-inline-flex gap-1">
-                    <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#Ceremony" role="button" aria-expanded="false">Ceremony</a>
-                    <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#Cocktail" role="button" aria-expanded="false">Cocktail Hour</a>
-                    <a class="btn btn-outline-primary" data-bs-toggle="collapse" href="#Reception" role="button" aria-expanded="false">Reception</a>             
-                </p>
-                <a asp-controller="Resort" asp-action="AddEventRequest">Add Event Space Info</a>
-                <div class="collapse" id="Ceremony">
-                    <h4>Ceremony</h4>
-                    <div class="row">
-                        @foreach (var item in Model.EventSpaces)
-                        {
-                            if (item.EventTypeId == 100)
-                            {
-                                <div class="col-sm-4" style="padding-bottom:2%">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5>@item.EventSpaceName</h5>
-                                            <p>
-                                                Event Type: @item.EventType.TypeName <br />
-                                                Description: @item.Description <br />
-                                                Minimum Guests: @item.MinGuests <br />
-                                                Maximum Guests: @item.MaxGuests <br />
-                                                @if (item.BookingFee != 0 && item.BookingFee != null)
-                                                {
-                                                    <i>Booking Fee: $@item.BookingFee USD</i>
-                                                }
-                                                <br />
-                                                @if (@item.Favourite == false)
-                                                {
-                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star.svg" /></a>
-                                                }
-                                                else
-                                                {
-                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star-fill.svg" /></a>
-                                                }
-                                                <span>|</span>
-                                                <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
-                                                <span>|</span>
-                                                <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <br />
-                                </div>
-
-                            }
-                        }
-                    </div>
-                       
+            <a asp-controller="Resort" asp-action="AddEventRequest">Add Event Space Info</a>
+           <nav class="nav">
+                <ul class="nav nav-tabs" id="eventSpaceTypes" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="ceremony-tab" data-bs-toggle="tab" data-bs-target="#ceremony-tab-pane" type="button" role="tab" aria-controls="ceremony-tab-pane" aria-selected="true">Ceremony</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="cocktail-hour-tab" data-bs-toggle="tab" data-bs-target="#cocktail-hour-tab-pane" type="button" role="tab" aria-controls="cocktail-hour-tab-pane" aria-selected="true">Cocktail Hour</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="reception-tab" data-bs-toggle="tab" data-bs-target="#reception-tab-pane" type="button" role="tab" aria-controls="reception-tab-pane" aria-selected="true">Reception</button>
+                    </li>
+                </ul>
+           </nav>
+           <div class="tab-content" id="eventSpaceTypeContent">
+                <div class="tab-pane fade show active" id="ceremony-tab-pane" role="tabpanel" aria-labelledby="ceremony-tab" tabindex="0">
+                    <partial name="_CeremonyPartial" />
                 </div>
-                <div class="collapse" id="Cocktail">
-                    <h4>Cocktail Hour</h4>
-                    <div class="row">
-                        @foreach (var item in Model.EventSpaces)
-                        {
-                            if (item.EventTypeId == 101)
-                            {
-                                <div class="col-sm-4" style="padding-bottom:2%">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <h5>@item.EventSpaceName</h5>
-                                            <p>
-                                                Event Type: @item.EventType.TypeName <br />
-                                                Description: @item.Description <br />
-                                                Minimum Guests: @item.MinGuests <br />
-                                                Maximum Guests: @item.MaxGuests <br />
-                                                @if (item.BookingFee != 0 && item.BookingFee != null)
-                                                {
-                                                    <i>Booking Fee: $@item.BookingFee USD</i>
-                                                }
-                                                <br />
-                                                @if (@item.Favourite == false)
-                                                {
-                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star.svg" /></a>
-                                                }
-                                                else
-                                                {
-                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star-fill.svg" /></a>
-                                                }
-                                                <span>|</span>
-                                                <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
-                                                <span>|</span>
-                                                <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <br />
-                                </div>
-
-                            }
-                        }
-                    </div>
-                       
+                <div class="tab-pane fade" id="cocktail-hour-tab-pane" role="tabpanel" aria-labelledby="cocktail-hour-tab" tabindex="1">
+                    <partial name="_CocktailHourPartial" />
                 </div>
-                <div class="collapse" id="Reception">
-                    <h4>Reception</h4>
-                    <div class="row">
-                        @foreach (var item in Model.EventSpaces)
-                        {
-                            if (item.EventTypeId == 102)
-                            {
-                                <div class="col-sm-4" style="padding-bottom:2%">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <h5>@item.EventSpaceName</h5>
-                                            <p>
-                                                Event Type: @item.EventType.TypeName <br />
-                                                Description: @item.Description <br />
-                                                Minimum Guests: @item.MinGuests <br />
-                                                Maximum Guests: @item.MaxGuests <br />
-                                                @if (item.BookingFee != 0 && item.BookingFee != null)
-                                                {
-                                                    <i>Booking Fee: $@item.BookingFee USD</i>
-                                                }
-                                                <br />
-                                                @if (@item.Favourite == false)
-                                                {
-                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star.svg" /></a>
-                                                }
-                                                else
-                                                {
-                                                    <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star-fill.svg" /></a>
-                                                }
-                                                <span>|</span>
-                                                <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
-                                                <span>|</span>
-                                                <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <br />
-                                </div>
-
-                            }
-                        }
-                    </div>
-                       
+                <div class="tab-pane fade" id="reception-tab-pane" role="tabpanel" aria-labelledby="reception-tab" tabindex="2">
+                    <partial name="_ReceptionPartial" />
                 </div>
-            </div>
-
-            
+           </div>
+           
+           
             <h2 id="dressCodeNav" class="mainBody">Dress Codes</h2>
             <a asp-controller="Resort" asp-action="AddDressCodeRequest">Add Dress Code Info</a>
             <table class="table table-bordered">
