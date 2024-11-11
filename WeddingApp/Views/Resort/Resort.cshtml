@@ -7,10 +7,10 @@
     <div class="col-2 sidebar">
         <nav id="#navBar-resortInfo" class="h-100 flex-column pe-4">
             <a class="navbar-brand" href="#">Resort Info</a>
-                <a class="nav-link" href="#restaurantNav">Restaurants</a>
-                <a class="nav-link" href="#barNav">Bars</a>
-                <a class="nav-link" href="#eventNav">Event Spaces</a>
-                <a class="nav-link" href="#dressCodeNav">Dress Code</a>
+            <a class="nav-link" href="#restaurantNav">Restaurants</a>
+            <a class="nav-link" href="#barNav">Bars</a>
+            <a class="nav-link" href="#eventNav">Event Spaces</a>
+            <a class="nav-link" href="#dressCodeNav">Dress Code</a>
         </nav>
     </div>
 
@@ -18,75 +18,75 @@
         <div data-bs-spy="scroll" data-bs-target="#navbar-resortInfo" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0" style="position: relative;">
             <h1 style="text-align:center">Resort Info</h1>
 
-                <h2 id="restaurantNav" class="mainBody">Restaurants</h2>
-                <div class="row">
-                    <a asp-controller="Resort" asp-action="AddRestaurantRequest">Add Restaurant Info</a>
-                    @foreach (var item in Model.Restaurants)
-                    {
-                        <div class="col-sm-4 mb-3 mb-sm-0" style="padding-bottom:2%">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h4>@item.RestaurantName</h4>
-                                    <p>
-                                        Cuisine: @item.CuisineType <br />
-                                        Description: @item.RestaurantDescription<br />
-                                        Dress Code: @item.DressCode.Title <br />
-                                        Hours:<br />
-                                        @if (item.HoursBreakfastEnd != null)
-                                        {
-                                            <i>Breakfast:@item.HoursBreakfastStart - @item.HoursBreakfastEnd</i>
+            <h2 id="restaurantNav" class="mainBody">Restaurants</h2>
+            <div class="row">
+                <a asp-controller="Resort" asp-action="AddRestaurantRequest">Add Restaurant Info</a>
+                @foreach (var item in Model.Restaurants)
+                {
+                    <div class="col-sm-4 mb-3 mb-sm-0" style="padding-bottom:2%">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4>@item.RestaurantName</h4>
+                                <p>
+                                    Cuisine: @item.CuisineType <br />
+                                    Description: @item.RestaurantDescription<br />
+                                    Dress Code: @item.DressCode.Title <br />
+                                    Hours:<br />
+                                    @if (item.HoursBreakfastEnd != null)
+                                    {
+                                        <i>Breakfast:@item.HoursBreakfastStart - @item.HoursBreakfastEnd</i>
 
-                                            <br />
-                                        }
-                                        @if (item.HoursLunchStart != null)
-                                        {
-                                            <i>Lunch:@item.HoursLunchStart - @item.HoursLunchEnd</i>
+                                        <br />
+                                    }
+                                    @if (item.HoursLunchStart != null)
+                                    {
+                                        <i>Lunch:@item.HoursLunchStart - @item.HoursLunchEnd</i>
 
-                                            <br />
-                                        }
-                                        @if (item.HoursDinnerStart != null)
-                                        {
-                                            <i>Dinner:@item.HoursDinnerStart - @item.HoursDinnerEnd</i>
+                                        <br />
+                                    }
+                                    @if (item.HoursDinnerStart != null)
+                                    {
+                                        <i>Dinner:@item.HoursDinnerStart - @item.HoursDinnerEnd</i>
 
-                                            <br />
-                                        }
-                                        <a asp-controller="Resort" asp-action="EditRestaurantRequest" asp-route-id="@item.RestaurantId">Edit</a>
-                                        <span>|</span>
-                                        <a asp-controller="Resort" asp-action="DeleteRestaurant" asp-route-restaurantId="@item.RestaurantId">Delete</a>
-                                </div>
+                                        <br />
+                                    }
+                                    <a asp-controller="Resort" asp-action="EditRestaurantRequest" asp-route-id="@item.RestaurantId">Edit</a>
+                                    <span>|</span>
+                                    <a asp-controller="Resort" asp-action="DeleteRestaurant" asp-route-restaurantId="@item.RestaurantId">Delete</a>
                             </div>
-                            <br />
                         </div>
-                    }
-                </div>
+                        <br />
+                    </div>
+                }
+            </div>
 
 
-                <h2 id="barNav" class="mainBody">Bars</h2>
-                <a asp-controller="Resort" asp-action="AddBarRequest">Add Bar Info</a>
-                <div class="row">
-                    @foreach (var item in Model.Bars)
-                    {
-                        <div class="col-sm-4 mb-3 mb-sm-0" style="padding-bottom:2%">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5>@item.BarName</h5>
-                                    <p>
-                                        Description: @item.Description <br />
-                                        @if (@item.SpecialInstructions != "")
-                                        {
-                                            <i>@item.SpecialInstructions</i> <br />
-                                        }
-                                        Hours: @item.HoursStart - @item.HoursEnd <br />
-                                        <a asp-controller="Resort" asp-action="EditBarRequest" asp-route-id="@item.BarId">Edit</a>
-                                        <span>|</span>
-                                        <a asp-controller="Resort" asp-action="DeleteBar" asp-route-barId="@item.BarId">Delete</a>
-                                    </p>
-                                </div>
+            <h2 id="barNav" class="mainBody">Bars</h2>
+            <a asp-controller="Resort" asp-action="AddBarRequest">Add Bar Info</a>
+            <div class="row">
+                @foreach (var item in Model.Bars)
+                {
+                    <div class="col-sm-4 mb-3 mb-sm-0" style="padding-bottom:2%">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>@item.BarName</h5>
+                                <p>
+                                    Description: @item.Description <br />
+                                    @if (@item.SpecialInstructions != "")
+                                    {
+                                        <i>@item.SpecialInstructions</i> <br />
+                                    }
+                                    Hours: @item.HoursStart - @item.HoursEnd <br />
+                                    <a asp-controller="Resort" asp-action="EditBarRequest" asp-route-id="@item.BarId">Edit</a>
+                                    <span>|</span>
+                                    <a asp-controller="Resort" asp-action="DeleteBar" asp-route-barId="@item.BarId">Delete</a>
+                                </p>
                             </div>
-                            <br />
                         </div>
-                    }
-                </div>
+                        <br />
+                    </div>
+                }
+            </div>
 
 
             <h2 id="eventNav" class="mainBody">Event Spaces</h2>
