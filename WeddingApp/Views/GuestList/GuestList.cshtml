@@ -8,10 +8,10 @@
         <button type="submit" class="btn btn-primary">Add new guest</button>
     </form>
     <br />
-    <table class="table table-bordered table-striped">
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th></th>
+                <th scope="col">#</th>
                 <th><a asp-controller="GuestList" asp-action="GetGuestList" asp-route-orderBy="1">First Name</a></th>
                 <th><a asp-controller="GuestList" asp-action="GetGuestList" asp-route-orderBy="2">Last Name</a></th>
                 <th><a asp-controller="GuestList" asp-action="GetGuestList" asp-route-orderBy="0">Role</a></th>
@@ -28,7 +28,7 @@
             @foreach (var guest in Model.Guests)
             {
                 <tr>
-                    <td>@counter</td>
+                    <td scope="row">@counter</td>
                     <td>@guest.FirstName</td>
                     <td>@guest.LastName</td>
                     <td>@guest.WeddingParty?.Role</td>
