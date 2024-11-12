@@ -24,35 +24,32 @@
                 @foreach (var item in Model.Restaurants)
                 {
                     <div class="col-sm-4 mb-3 mb-sm-0" style="padding-bottom:2%">
-                        <div class="card h-100">
+                        <div class="card border-dark mb-3 h-100">
+                            <h4 class="card-header text-center">@item.RestaurantName</h4>
                             <div class="card-body">
-                                <h4>@item.RestaurantName</h4>
-                                <p>
+                                <p class="card-text">
                                     Cuisine: @item.CuisineType <br />
                                     Description: @item.RestaurantDescription<br />
                                     Dress Code: @item.DressCode.Title <br />
-                                    Hours:<br />
                                     @if (item.HoursBreakfastEnd != null)
                                     {
                                         <i>Breakfast:@item.HoursBreakfastStart - @item.HoursBreakfastEnd</i>
-
                                         <br />
                                     }
                                     @if (item.HoursLunchStart != null)
                                     {
                                         <i>Lunch:@item.HoursLunchStart - @item.HoursLunchEnd</i>
-
                                         <br />
                                     }
                                     @if (item.HoursDinnerStart != null)
                                     {
                                         <i>Dinner:@item.HoursDinnerStart - @item.HoursDinnerEnd</i>
-
-                                        <br />
                                     }
-                                    <a asp-controller="Resort" asp-action="EditRestaurantRequest" asp-route-id="@item.RestaurantId">Edit</a>
-                                    <span>|</span>
-                                    <a asp-controller="Resort" asp-action="DeleteRestaurant" asp-route-restaurantId="@item.RestaurantId">Delete</a>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a asp-controller="Resort" asp-action="EditRestaurantRequest" asp-route-id="@item.RestaurantId">Edit</a>
+                                <span>|</span>
+                                <a asp-controller="Resort" asp-action="DeleteRestaurant" asp-route-restaurantId="@item.RestaurantId">Delete</a>
                             </div>
                         </div>
                         <br />
@@ -68,19 +65,22 @@
                 {
                     <div class="col-sm-4 mb-3 mb-sm-0" style="padding-bottom:2%">
                         <div class="card h-100">
+                            <h5 class="card-header text-center">@item.BarName</h5>
                             <div class="card-body">
-                                <h5>@item.BarName</h5>
-                                <p>
+                                <p class="card-text">
                                     Description: @item.Description <br />
                                     @if (@item.SpecialInstructions != "")
                                     {
-                                        <i>@item.SpecialInstructions</i> <br />
+                                        <i>@item.SpecialInstructions</i> 
+                                        <br />
                                     }
-                                    Hours: @item.HoursStart - @item.HoursEnd <br />
-                                    <a asp-controller="Resort" asp-action="EditBarRequest" asp-route-id="@item.BarId">Edit</a>
-                                    <span>|</span>
-                                    <a asp-controller="Resort" asp-action="DeleteBar" asp-route-barId="@item.BarId">Delete</a>
+                                    Hours: @item.HoursStart - @item.HoursEnd
                                 </p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a asp-controller="Resort" asp-action="EditBarRequest" asp-route-id="@item.BarId">Edit</a>
+                                <span>|</span>
+                                <a asp-controller="Resort" asp-action="DeleteBar" asp-route-barId="@item.BarId">Delete</a>
                             </div>
                         </div>
                         <br />

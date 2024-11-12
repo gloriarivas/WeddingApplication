@@ -5,17 +5,9 @@
         {
             <div class="col-sm-4" style="padding-bottom:2%">
                 <div class="card">
-                    <div class="card-body">
-                        <h5>@item.EventSpaceName</h5>
-                        <p>
-                            Description: @item.Description <br />
-                            Minimum Guests: @item.MinGuests <br />
-                            Maximum Guests: @item.MaxGuests <br />
-                            @if (item.BookingFee != 0 && item.BookingFee != null)
-                            {
-                                <i>Booking Fee: $@item.BookingFee USD</i>
-                            }
-                            <br />
+                    <div class="card-header">
+                        <h5 style="float:left">@item.EventSpaceName</h5>
+                        <div style="float:right">
                             @if (@item.Favourite == false)
                             {
                                 <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star.svg" /></a>
@@ -24,16 +16,27 @@
                             {
                                 <a asp-controller="Resort" asp-action="AddToFavourites" asp-route-id="@item.EventSpaceId"><img src="/SVG/star-fill.svg" /></a>
                             }
-                            <span>|</span>
-                            <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
-                            <span>|</span>
-                            <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Description: @item.Description <br />
+                            Minimum Guests: @item.MinGuests <br />
+                            Maximum Guests: @item.MaxGuests <br />
+                            @if (item.BookingFee != 0 && item.BookingFee != null)
+                            {
+                                <i>Booking Fee: $@item.BookingFee USD</i>
+                            }
                         </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a asp-controller="Resort" asp-action="EditEventSpaceRequest" asp-route-id="@item.EventSpaceId">Edit</a>
+                        <span>|</span>
+                        <a asp-controller="Resort" asp-action="DeleteEvent" asp-route-id="@item.EventSpaceId">Delete</a>
                     </div>
                 </div>
                 <br />
             </div>
-
         }
     }
 </div>
